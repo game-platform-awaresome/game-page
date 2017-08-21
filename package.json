@@ -1,0 +1,27 @@
+{
+  "name": "game-page",
+  "version": "1.0.0",
+  "description": "游戏页面",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Greentea1120/game-page.git"
+  },
+  "author": "greentea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Greentea1120/game-page/issues"
+  },
+  "homepage": "https://github.com/Greentea1120/game-page#readme",
+  "devDependencies": {
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^1.15.0"
+  }
+}
