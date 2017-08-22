@@ -2,6 +2,9 @@ var webpack             = require('webpack');
 var ExtractTextPlugin   = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin   = require('html-webpack-plugin');
 
+//环境变量配置    dev  /  online
+var WEBPACK_ENV  =  process.env.WEBPACK_ENV  ||  'dev'
+console.log(WEBPACK_ENV)
 
 
 //获取html-webpack-plugin参数的方法
@@ -17,19 +20,31 @@ var getHtmlConfig = function (name) {
 
 var config = {
     entry : {
-        'common' : './src/page/common/index.js',
+        'common' : ['./src/page/common/index.js'],
         'index' : './src/page/index/index.js'
     },
     output : {
         path : './dist/',
+        publicPath:'/dist/',
         filename : 'js/[name].js'
     },
     externals : {
         'jquery' : 'window.jQuery'
     },
+    resolve :{
+        alias : {
+            util    : __dirname + '/src/util',
+            page    : __dirname + '/src/page',
+            service : __dirname + '/src/service',
+            image   : __dirname + '/src/image',
+            node_modules : __dirname + '/node_modules'
+        }
+    },
     module : {
         loaders : [
-            {test : /\.css$/,loader : ExtractTextPlugin.extract('style-loader','css-loader')}
+            {test : /\.css$/,loader : ExtractTextPlugin.extract('style-loader','css-loader')},
+            {test:/\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/,loader:'url-loader?limit=1000&name=resource/[name].[ext]'},
+            {test:/\.string$/,loader:'html-loader'}
         ]
     },
     plugins : [
@@ -44,6 +59,9 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('index'))
     ]
 }
-
+//做判断
+if(WEBPACK_ENV === 'dev'){
+    config.entry.common.push('webpack-dev-server/client?http://localhost:8088/')
+}
 
 module.exports = config;

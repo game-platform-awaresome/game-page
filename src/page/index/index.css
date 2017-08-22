@@ -1,3 +1,355 @@
-body{
-    background: #ccc;
+
+
+.game-play-page {
+    position: relative;
+    background: #000;
+    margin: 0 auto;
+    height: 1080px;
+}
+.pay-box, .dialog-box {
+    position: fixed;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .6);
+    font-size: 15px;
+    text-align: center;
+}
+.pay-box > div, .dialog-box > div {
+    position: fixed;
+    z-index: 10001;
+
+    height: 300px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+}
+@media only screen and (max-width: 900px) {
+    .pay-box > div, .dialog-box > div {
+        position: fixed;
+        z-index: 10001;
+        height: 30%;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 5px;
+        transform: translate(-50%, -50%);
+    }
+}
+.pay-box > div > p.pay-box-tit {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    position: relative;
+    color: #222;
+    z-index: 1;
+
+}
+.pay-box > div > p.pay-box-bottom {
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #222;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+.pay-head {
+    position: relative;
+    color: #333;
+    padding: 20px 0;
+    line-height: 2.4;
+    font-size: 18px;
+}
+.pay-head span:nth-child(1) {
+    left: 0;
+    width: 100%;
+}
+.pay-head span {
+    position: absolute;
+    top: 0;
+}
+.pay-head span:nth-child(2) {
+    right: 15px;
+    font-weight: bold;
+    font-size: 22px;
+    color: #737272;
+    line-height: 1.8;
+    cursor: pointer;
+}
+.pay-info p:last-child {
+    font-size: 30px;
+}
+.pay-info {
+    background: #f5f5f5;
+    border-top: 1px solid #e5e5e7;
+    padding: 9px 0 6px 0;
+}
+#pay-list li span {
+    margin-left: 10px;
+}
+.pay-mode {
+    border-top: 1px solid #e5e5e7;
+    border-bottom: 1px solid #e5e5e7;
+    text-align: left;
+}
+.pay-mode li:first-child {
+    border-top: 1px solid #fff;
+}
+
+.pay-mode li {
+    display: list-item;
+    height: 31px;
+    line-height: 31px;
+    padding: 5px 0;
+    border-top: 1px solid #e5e5e7;
+    margin-left: 6%;
+    display: none;
+}
+
+/*.pay-mode li i {
+    float: left;
+    width: 32px;
+    height: 32px;
+    background: url(http://cdn.11h5.com/static/image/pay_box_icon.jpg) no-repeat;
+}*/
+
+.pay-mode li i.pay-wx {
+    background: url('../../image/wxpay_icon.png');
+    background-size: cover;
+}
+
+/*.pay-mode li i.pay-zfb {
+    background: url(http://cdn.11h5.com/static/image/alipay_icon.png);
+    background-size: cover;
+}*/
+
+[class^="icon-"] {
+    display: inline-block;
+    font-family: 'FontAwesome';
+}
+
+.pay-mode li em.icon-check:before, .pay-tip p em.icon-check:before {
+    position: absolute;
+    left: 0;
+    top: -5px;
+    color: #3997EE;
+}
+.icon-check:before {
+    content: "\e803";
+}
+.pay-mode li em, .pay-tip p em {
+    float: right;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #e5e5e7;
+    margin: 5px 10px 0 0;
+    position: relative;
+    font-size: 21px;
+}
+.pay-btn {
+    width: 82%;
+    margin: 0 auto;
+    padding: 14px 0;
+}
+.login-info > div > a, .pay-btn > a {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    border: 1px solid #3997EE;
+    background: #3997EE;
+    color: #fff;
+    text-decoration: none;
+    line-height: 1;
+    border-radius: 2px;
+}
+.pay-tip {
+    line-height: 1;
+    padding-bottom: 10px;
+}
+
+.pay-tip > p {
+    /*float: right;*/
+    font-size: 13px;
+    line-height: 12px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+.pay-tip p a {
+    text-decoration: none;
+}
+
+.pay-tip p input {
+    vertical-align: middle;
+    transform: translateY(-2px);
+}
+
+.dialog-box > div {
+    z-index: 99999;
+}
+
+.dialog_hd {
+    padding: 20px 0 15px 0;
+    color: #333;
+}
+
+.dialog_bd {
+    padding: 0 20px;
+    font-size: 15px;
+    color: #888;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.dialog_bd .content, .dialog_bd .footer {
+    line-height: 22px;
+    text-align: left;
+    font-size: 12px;
+    color: #666;
+}
+
+.dialog_ft {
+    margin-top: 20px;
+    border-top: 1px solid #d5d5d5;
+}
+
+.dialog_ft a {
+    display: block;
+    color: #00A3FF;
+    line-height: 42px;
+    text-decoration: none;
+}
+
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, .6);
+    top: 0;
+    left: 0;
+}
+
+#backBanner {
+    height: 120px;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+}
+
+.back-box {
+    position: absolute;
+    top: 50%;
+    margin-top: -200px;
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    max-width: 400px;
+    background-color: #e5e5e7;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 400px;
+}
+
+.back-content {
+    height: 150px;
+    text-align: center;
+}
+
+.back-content img {
+    float: left;
+    margin: 10px 0 0 10px;
+    width: 120px;
+    height: 120px;
+}
+
+.back-content p {
+    float: right;
+    width: 170px;
+    line-height: 26px;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+.noAlert {
+    /*margin-left: 23px;*/
+}
+.back-content p:first-of-type {
+    margin-top: 15px;
+}
+.back-btn-box {
+    height: 40px;
+    padding-top: 15px;
+}
+.back-btn-box a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 4px;
+    font-size: 12px;
+}
+.back-btn {
+    border: none;
+    border-radius: 3px;
+}
+.back-btn-leave {
+    display: block !important;
+    margin: 0 auto;
+    border: #00A3FF solid 1px;
+    color: #00A3FF;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.back-btn-fault {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 5px;
+    top: 5px;
+    color: #fff;
+}
+.fa-fw {
+    width: 20px;
+}
+.back-btn-box label {
+    font-size: 12px;
+    color: #333333;
+}
+.back-box ul {
+    text-align: center;
+}
+.back-box ul li {
+    display: inline-block;
+    width: 70px;
+}
+.back-box ul li img {
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.back-box ul li p {
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+}
+#noAlert {
+    transform: translateY(2px);
+}
+.saoma-close{
+    display: block;top:0;position: absolute;width: 30px;height: 30px;background: url("../../image/delete.png");right: 0;background-size: 32px;
 }
