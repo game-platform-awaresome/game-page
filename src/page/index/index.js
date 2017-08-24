@@ -13,7 +13,21 @@ var page = {
     onLoad : function () {
 
     },
-/*    bindEvent : function () {
+    bindEvent : function () {
+        $.get('/api/h5/user/getUserinfo', function (data) {
+            if (data.user === null) {
+                window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
+            }
+
+        });
+        // 返回URL地址
+        var gameId = tools.getUrlParam('id')        //获取区服ID
+        var gid = '';
+        $.get('/api/h5/game/play',{id:gameId},function (data) {
+            $('.class-iframe').attr('src',data.url)
+            gid = data.gid
+        },'JSON')
+
         //如果从iframe收到message,显示支付页面
         var order = "";
         window.addEventListener("message", function (event) {
@@ -43,10 +57,10 @@ var page = {
             },
             starting: function () {
                 order.paytype = 'wechat';
-                $.post('{:U("/h5/Pay/beginpay")}', order, function (result) {
+                $.post('api/h5/Pay/beginpay', order, function (result) {
                     if (result.code === 1) {
                         if (result.code_url) {
-                            /!*二维码支付*!/
+                            /*二维码支付*/
                             $('#ewm').attr('src', "http://www.kukewan.com/pay/png?url=" + result.code_url);
                             $('#saoma').show();
                             //定时发送请求检查订单状态
@@ -67,7 +81,7 @@ var page = {
         }
         function checkpay(oid) {
             var s = setInterval(function () {
-                $.get('http://h5.wan855.cn/api/h5/pay/checkpay/order/' + oid, function (data) {
+                $.get('/api/h5/pay/checkpay/order/' + oid, function (data) {
                     if (data == 1) {
                         $('#pay-box').css('display', 'none');
                         $('#saoma').hide();
@@ -76,7 +90,7 @@ var page = {
                 });
             }, 2000)
         }
-        $.get('http://h5.wan855.cn/api/h5/index/gamead', function (data) {
+        $.get('/api/h5/index/gamead', function (data) {
             var url = data.slide_pic
             $('#backBanner').attr('src', url)
         });
@@ -86,7 +100,7 @@ var page = {
         var layers = {
             //获取banner图片
             bg: function () {
-                $.get('http://h5.wan855.cn/api/h5/index/gamead', function (data) {
+                $.get('/api/h5/index/gamead', function (data) {
 
                     var url = data.slide_pic
                 });
@@ -112,6 +126,13 @@ var page = {
 
             },
         }
+        $('.back-btn-close').click(function () {
+            layers.close()
+        })
+        $('.back-btn-leave').click(function () {
+            layers.leave()
+        })
+
         //判断是否是微信浏览器
         function isWechat() {
             var ua = navigator.userAgent.toLowerCase();
@@ -164,7 +185,7 @@ var page = {
             $("#saoma").css('display', 'none');
             clearInterval(s);
         });
-        /!*点击数量*!/
+        /*点击数量*/
         $('.game-list').click(function (event) {
             var $target = event.target;
             if ($($target).attr('data-url') === '/') {
@@ -191,12 +212,45 @@ var page = {
                 })
             }
         });
-        // wx.config(<?php echo $jssdk->config(array('onMenuShareQQ', 'onMenuShareWeibo'), false); ?>);
 
-        /!**
+
+
+        $.get('/api/h5/index/getwechatsdkconf?route='+ encodeURIComponent(window.location.pathname+window.location.search),function (data) {
+            console.log(data)
+            wx.config(data)
+            /*s*/
+            $.get('/api/h5/game/gameinfo/',{gid : gid},function (data) {
+                wx.onMenuShareTimeline({
+                    title: data.name, // 分享标题
+                    link: window.location.protocol + "//" + window.location.host + data.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: data.img, // 分享图标
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                        $.get('/api/Integral/Task/share',function(data){
+                            if(data === '200'){
+
+                            }
+                        },'JSON')
+                    },
+                    cancel: function () {
+                        alert('用户取消分享后执行的回调函数!')
+                        // 用户取消分享后执行的回调函数
+                    },
+                    error:function () {
+                        alert('失败')
+                    }
+
+                })
+            },'JSON')
+
+            /*e*/
+        },'JSON')
+
+
+        /**
          * 微信付款
          * @param $attr 付款参数
-         *!/
+         */
         function wechatpay($attr) {
             windowControl.payClose()
             function onBridgeReady() {
@@ -220,7 +274,9 @@ var page = {
                 onBridgeReady();
             }
         }
-    }*/
+
+
+    }
 }
 $(function () {
     page.init()
