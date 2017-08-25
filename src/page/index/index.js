@@ -23,7 +23,7 @@ var page = {
         // 返回URL地址
         var gameId = tools.getUrlParam('id')        //获取区服ID
         var gid = '';
-        $.get('/api/h5/game/play',{id:gameId},function (data) {
+        $.get('/api/h5/game/play',{id:9},function (data) {
             $('.class-iframe').attr('src',data.url)
             gid = data.gid
         },'JSON')

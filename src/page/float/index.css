@@ -1,0 +1,20 @@
+
+.float{
+    position: absolute;
+    top:40px;
+    right: 0;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    background: url("../../image/pc-login-jiangzi.png") no-repeat 0 0;
+    background-size: cover;
+    border-radius: 50%;
+}
+.alert-ball{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9998;
+}

@@ -2,9 +2,10 @@
 
 .game-play-page {
     position: relative;
+    min-height: 100%;
     background: #000;
     margin: 0 auto;
-    height: 1080px;
+    height: 100%;
 }
 .pay-box, .dialog-box {
     position: fixed;
