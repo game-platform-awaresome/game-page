@@ -5,7 +5,16 @@ require('./index.css')
 
 var page = {
     init : function () {
-        this.ballMove()
+        this.ballMove();
+        this.bindEvent();
+    },
+    bindEvent : function () {
+        var $float      = $('#float');
+        var $windowWrap  = $('#windowWrap');
+        $float.click(function () {
+            $(this).hide();
+            $windowWrap.show();
+        })
     },
     ballMove : function () {
         if (this.isPc()){

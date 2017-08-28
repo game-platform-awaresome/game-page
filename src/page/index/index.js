@@ -2,8 +2,9 @@
 
 
 
-var tools = require('util/tool.js')
+var tools = require('util/tool.js');
 require('./index.css');
+require('../window/index.js');
 
 var page = {
     init : function(){

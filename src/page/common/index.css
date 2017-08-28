@@ -61,3 +61,59 @@ body {
 a {
     text-decoration: none;
 }
+
+
+/* ============
+    工具样式
+ ============ */
+
+.center-block{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.pull-right{
+    float: right !important;
+}
+.pull-left{
+    float: left !important;
+}
+.text-right{
+    text-align: right !important;
+}
+.text-left{
+    text-align: left !important;
+}
+.text-center{
+    text-align: center !important;
+}
+.hide{
+    display: none !important;
+}
+.show{
+    display: block !important;
+}
+.invisible{
+    visibility: hidden;
+}
+.text-hide{
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+/*清除浮动*/
+.clearfix:before,
+.clearfix:after{
+    content: " ";
+    display: table;
+}
+.clearfix:after{
+    clear: both;
+}
+/*移动端默认样式 IOS*/
+input[type=button]{
+    -webkit-appearance:none;
+    outline:none
+}

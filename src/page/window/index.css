@@ -1,0 +1,190 @@
+.window-wrap{
+    position: absolute;
+    z-index: 10000;
+    background: #fff;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.window-main{
+    float: left;
+    width: calc(100% - 60px);
+}
+/*主导航*/
+.window-nav{
+    position: relative;
+    float: right;
+    width: 60px;
+    height: 100%;
+    background: #1a191e;
+
+}
+.window-nav-box{
+    position: absolute;
+    top:50%;
+    transform: translate(0,-50%);
+    width: 100%;
+}
+.window-nav-box a{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.window-nav-box a .window-nav-function{
+    display: block;
+    height: 60px;
+    width: 60px;
+    background-size: 80%;
+}
+.window-nav-function.collection{
+    background: url("../../image/window-nav-collection.png") center 0 no-repeat;
+}
+.window-nav-function.close{
+    background: url("../../image/window-nav-close.png") center 0 no-repeat;
+}
+.window-nav-function.refresh{
+    background: url("../../image/window-nav-refresh.png") center 0 no-repeat;
+}
+
+.window-nav-box a p{
+    /*position: absolute;*/
+    width: 100%;
+    text-align: center;
+    bottom:10px;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+
+/*头部*/
+.window-main-header{
+    position: relative;
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 10px;
+}
+.window-main-header-image{
+    display: block;
+    float: left;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+.window-main-userinfo-box{
+    float: left;
+    padding: 10px 0 0 10px;
+}
+.window-username{
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 16px;
+    color: #333;
+}
+.window-id{
+    display: block;
+    height: 16px;
+    line-height: 16px;
+    margin-top: 5px;
+    text-indent: 15px;
+    font-size: 14px;
+    color: #999;
+}
+.window-change-account{
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    top: 50%;
+    margin-top: -15px;
+    border:2px solid #1c81dd;
+    right: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    color: #1c81dd;
+}
+/*导航*/
+.window-main-nav{
+    border-bottom: 1px solid #ccc;
+}
+.window-main-nav .window-main-nav-item{
+    width: 25%;
+    float: left;
+    height: 80px;
+    position: relative;
+
+}
+.nav-image{
+    width: 60px;
+    height: 60px;
+    margin:0 auto;
+    background-size: 80%!important;
+}
+.window-main-nav-item.customer-service .nav-image{
+    background: url("../../image/customer-service.png") center center no-repeat;
+}
+.window-main-nav-item-active.customer-service .nav-image{
+    background: url("../../image/customer-service-active.png") center center no-repeat;
+}
+.window-main-nav-item.package .nav-image{
+    background: url("../../image/package.png") center center no-repeat;
+}
+.window-main-nav-item-active.package .nav-image{
+    background: url("../../image/package-active.png") center center no-repeat;
+}
+.window-main-nav-item.save-window .nav-image{
+    background: url("../../image/save-window.png") center center no-repeat;
+}
+.window-main-nav-item-active.save-window .nav-image{
+    background: url("../../image/save-window-active.png") center center no-repeat;
+}
+.window-main-nav-item.more-game .nav-image{
+    background: url("../../image/more-game.png") center center no-repeat;
+}
+.window-main-nav-item-active.more-game .nav-image{
+    background: url("../../image/more-game-active.png") center center no-repeat;
+}
+.window-main-nav .window-main-nav-item p{
+    position: absolute;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    height: 24px;
+    line-height: 24px;
+    bottom: 0;
+    color: #000;
+    margin-bottom: 5px;
+}
+.window-main-nav .window-main-nav-item.window-main-nav-item-active p{
+    color: #9871be;
+}
+
+/*主内容*/
+.window-main-item{
+    display: none;
+}
+.window-main-item.window-main-item-active{
+    display: block;
+}
+
+/*客服*/
+.window-main-item-title{
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+    line-height: 60px;
+    background: url("../../image/customer-service-logo.png") 20px center no-repeat;
+    background-size: 40px;
+}
+.window-main-item-title span{
+    font-size: 14px;
+    padding-left: 80px;
+}
+.customer-service-box img{
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin:80px auto;
+}
