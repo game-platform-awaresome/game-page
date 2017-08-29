@@ -15,12 +15,6 @@ var page = {
 
     },
     bindEvent : function () {
-        $.get('/api/h5/user/getUserinfo', function (data) {
-            if (data.user === null) {
-                window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
-            }
-
-        });
         // 返回URL地址
         var gameId = tools.getUrlParam('id')        //获取区服ID
         var gid = '';

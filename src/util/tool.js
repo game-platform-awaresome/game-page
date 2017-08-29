@@ -12,16 +12,20 @@ var tools = {
             data        : param.data    || '',
             success     : function (res) {
                 //请求成功
-                if(0 === res.status){
-                    typeof  param === 'function' && param.success(res.data,res.msg);
+                if(2000 == res.code){
+                    typeof  param === 'function' && param.success(res);
                 }
                 //没有登录状态
-
+                else if(4006 == res.code){
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
+                }
                 //请求失败
-
+                else{
+                    typeof param.error === 'function' && param.error(res);
+                }
             },
             error       : function (err) {
-
+                console.log(err);
             }
         })
     },
@@ -44,9 +48,7 @@ var tools = {
     //错误提示
     errorTips : function(msg){
         alert(msg || '哪里不对了吧');
-    },
-
-
+    }
 }
 
 module.exports = tools;
