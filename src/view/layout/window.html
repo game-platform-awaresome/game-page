@@ -8,21 +8,22 @@
             </div>
             <a href="javascript:;" class="window-change-account">切换账号</a>
         </div>
-        <ul class="window-main-nav clearfix">
+        <ul class="window-main-nav clearfix" id="windowMainNav">
             <li class="window-main-nav-item customer-service ">
                 <div class="nav-image"></div>
                 <p>客服</p></li>
-            <li class="window-main-nav-item package">
+            <li class="window-main-nav-item package window-main-nav-item-active">
                 <div class="nav-image"></div>
                 <p>礼包</p></li>
-            <li class="window-main-nav-item save-window">
+            <li class="window-main-nav-item save-window" id="saveWindowBtn">
                 <div class="nav-image"></div>
                 <p>存桌面</p></li>
-            <li class="window-main-nav-item more-game window-main-nav-item-active">
+            <li class="window-main-nav-item more-game ">
                 <div class="nav-image"></div>
                 <p>更多游戏</p></li>
         </ul>
-        <ul class="window-main-list">
+        <ul class="window-main-list" id="windowMainList">
+            <!--客服-->
             <li class="window-main-item">
                 <div class="window-main-item-title">
                     <span>客服QQ:2143548021</span>
@@ -31,44 +32,20 @@
                     <img src="../../image/erwei.jpg" alt="">
                 </div>
             </li>
-            <li class="window-main-item">
-                <div class="package-wrap">
-                    <!--<ul class="package-list">
-                        <li>-->
-                    <ul class="package-item">
-                        <li>
-                            <div class="package-box">
-                                <img src="../../image/game-img.png" alt="" class="package-img">
-                                <p class="package-game-name">哆啦A梦</p>
-                                <a href="" class="package-link">开始</a>
-                            </div>
-                            <div class="package-content">
-                                <p class="package-name">新手进阶</p>
-                                <p class="package-describe">金币*100000</p>
-                                <a href="" class="package-get-package">领取</a>
-                            </div>
-                        </li>
-                    </ul>
-                            <!--<div class="package-get-more">查看更多礼包(?)</div>-->
-                  <!--      </li>
-                    </ul>-->
+            <!--礼包-->
+            <li class="window-main-item window-main-item-active">
+                <div class="package-wrap" id="packageWrap">
+
                 </div>
             </li>
+            <!--存桌面-->
             <li class="window-main-item">
                 <div class="save-window-wrap"></div>
             </li>
-            <li class="window-main-item window-main-item-active">
-                <div class="more-game-wrap">
-                    <ul>
-                        <li class="clearfix">
-                            <img src="../../image/game-img.png" alt="" class="more-game-img">
-                            <div class="more-game-box clearfix">
-                                <p class="more-game-name">超级玛丽 <span class="">独家</span></p>
-                                <p class="more-game-content">风靡全球的经典游戏</p>
-                            </div>
-                            <a href="" class="more-game-start">开始</a>
-                        </li>
-                    </ul>
+            <!--更多游戏-->
+            <li class="window-main-item ">
+                <div class="more-game-wrap" id="moreGameWrap">
+
                 </div>
             </li>
         </ul>

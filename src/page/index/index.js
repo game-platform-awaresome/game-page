@@ -18,7 +18,7 @@ var page = {
         // 返回URL地址
         var gameId = tools.getUrlParam('id')        //获取区服ID
         var gid = '';
-        $.get('/api/h5/game/play',{id:9},function (data) {
+        $.get('/api/h5/game/play',{id:gameId},function (data) {
             $('.class-iframe').attr('src',data.url)
             gid = data.gid
         },'JSON')
@@ -104,8 +104,6 @@ var page = {
             //弹出提示框
             open: function () {
                 $('.back').css('display', 'block');
-
-                console.log(url)
 
                 console.log('ok')
             },

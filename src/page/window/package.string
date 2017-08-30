@@ -1,0 +1,17 @@
+
+<div class="package-title">
+    <div>游戏礼包
+        <div class="package-triangle"></div>
+    </div>
+</div>
+<ul class="package-item">
+    {{#gift}}
+    <li>
+        <div class="package-content">
+            <p class="package-name">{{name}}</p>
+            <p class="package-describe">{{card_context}}</p>
+            <a href="" class="package-get-package">领取</a>
+        </div>
+    </li>
+    {{/gift}}
+</ul>

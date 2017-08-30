@@ -9,13 +9,7 @@ var _window = {
             success : resolve,
             error : reject
         })
-    },
-    //礼包
-    // getPackage : function (resolve, reject) {
-    //     _tool.request({
-    //         url :
-    //     })
-    // }
+    }
 }
 
 module.exports = _window;

@@ -196,6 +196,7 @@
 /*礼包*/
 .package-wrap{
     padding:0 20px;
+    position: relative;
 }
 .package-box{
     border-bottom: 1px solid #f0f0f0;
@@ -216,6 +217,29 @@
     margin-top: -8px;
     font-size: 16px;
     left: 60px;
+}
+.package-title{
+    position: relative;
+    margin:20px 0;
+    height: 30px;
+}
+.package-title > div{
+    position: absolute;
+    height: 30px;
+    background-color: #d72132;
+    width: 140px;
+    left: -20px;
+    line-height: 30px;
+    text-indent: 20px;
+    color: #fff;
+}
+.package-title > div .package-triangle{
+    position: absolute;
+    right:-1px;
+    top:0;
+    border-right: 20px solid #fff;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
 }
 .package-item li .package-box .package-link{
     position: absolute;
@@ -247,6 +271,9 @@
     height: 20px;
     line-height: 20px;
     max-width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .package-content .package-get-package{
     position: absolute;
@@ -277,7 +304,7 @@
 }
 /*更多游戏*/
 .more-game-wrap ul li{
-    padding:25px 20px;
+    padding:16px 20px;
     border-bottom: 1px solid #f5f5f5;
 }
 .more-game-img{
@@ -290,6 +317,7 @@
     height: 50px;
     float: left;
     padding:5px 10px;
+    width: 160px;
 }
 .more-game-name{
     font-size: 16px;
@@ -301,6 +329,10 @@
     font-size: 14px;
     color: #999;
     margin-top: 14px;
+    width: 160px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .more-game-start{
     float: right;

@@ -48,6 +48,25 @@ var tools = {
     //错误提示
     errorTips : function(msg){
         alert(msg || '哪里不对了吧');
+    },
+    //转换成数组
+    transformArray :  function(obj){
+        var arr = [];
+        for(var item in obj){
+            arr.push(obj[item]);
+        }
+        return arr;
+    },
+    //判断是否是微信浏览器
+    isWechat : function() {
+        var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+            console.log('是微信浏览器')
+            return true;
+        }else{
+            console.log('不是微信浏览器')
+            return false;
+        }
     }
 }
 
