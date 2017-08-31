@@ -6,6 +6,7 @@
     top: 0;
     left: 0;
     width: 100%;
+
 }
 .window-main{
     float: left;
@@ -301,6 +302,11 @@
     height: 100%;
     background: url("../../image/save-window-bg.jpg") center 0 no-repeat;
     background-size: cover!important;
+}
+@media only screen and (min-width: 600px){
+    .save-window-wrap{
+        background-size: contain!important;
+    }
 }
 /*更多游戏*/
 .more-game-wrap ul li{

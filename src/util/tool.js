@@ -67,6 +67,15 @@ var tools = {
             console.log('不是微信浏览器')
             return false;
         }
+    },
+    //判断是否是安卓
+    isAndroid : function () {
+        var u = navigator.userAgent;
+        if(u.indexOf('Android') > -1 || u.indexOf('Adr') > -1){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

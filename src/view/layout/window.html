@@ -1,18 +1,18 @@
-<div class="window-wrap" id="windowWrap" style="display: block">
+<div class="window-wrap" id="windowWrap" style="display: none">
     <div class="window-main">
         <div class="window-main-header">
             <img src="" alt="" class="window-main-header-image" id="windowMainHeaderImage">
             <div class="window-main-userinfo-box clearfix">
-                <span class="window-username" id="windowUsername">greentea</span>
-                <span class="window-id" id="windowId">123456789</span>
+                <span class="window-username" id="windowUsername"></span>
+                <span class="window-id" id="windowId"></span>
             </div>
-            <a href="javascript:;" class="window-change-account">切换账号</a>
+            <a href="/login" class="window-change-account" id="windowChangeAccount">切换账号</a>
         </div>
         <ul class="window-main-nav clearfix" id="windowMainNav">
-            <li class="window-main-nav-item customer-service ">
+            <li class="window-main-nav-item customer-service window-main-nav-item-active">
                 <div class="nav-image"></div>
                 <p>客服</p></li>
-            <li class="window-main-nav-item package window-main-nav-item-active">
+            <li class="window-main-nav-item package ">
                 <div class="nav-image"></div>
                 <p>礼包</p></li>
             <li class="window-main-nav-item save-window" id="saveWindowBtn">
@@ -24,7 +24,7 @@
         </ul>
         <ul class="window-main-list" id="windowMainList">
             <!--客服-->
-            <li class="window-main-item">
+            <li class="window-main-item window-main-item-active">
                 <div class="window-main-item-title">
                     <span>客服QQ:2143548021</span>
                 </div>
@@ -33,7 +33,7 @@
                 </div>
             </li>
             <!--礼包-->
-            <li class="window-main-item window-main-item-active">
+            <li class="window-main-item ">
                 <div class="package-wrap" id="packageWrap">
 
                 </div>

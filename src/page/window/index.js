@@ -13,25 +13,30 @@ var page = {
     },
     onLoad : function () {
         var _this = this;
-        $windowMainHeaderImage = $('#windowMainHeaderImage');   //用户头像
-        $windowUsername        = $('#windowUsername');          //用户名
-        $windowId              = $('#windowId');                //用户ID
-
-        $windowMainNav         = $('#windowMainNav');           //导航
-        $windowMainList        = $('#windowMainList');          //导航列表
+        var $windowMainHeaderImage = $('#windowMainHeaderImage');   //用户头像
+        var $windowUsername        = $('#windowUsername');          //用户名
+        var $windowId              = $('#windowId');                //用户ID
+        var $windowWrap            = $('#windowWrap');              //窗口
+        var $float                 = $('#float');                   //悬浮球
+        var $windowMainNav         = $('#windowMainNav');           //导航
+        var $windowMainList        = $('#windowMainList');          //导航列表
+        var $windowMainNavItem     = $('.window-main-nav-item');    //导航列表的集合
         //获取用户信息
         $.get('/api/h5/user/getUserinfo',function (res) {
+            if (res.user === null) {
+                window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
+            }
             $windowMainHeaderImage.attr('src',res.user.avatar);
             $windowUsername.text(res.user.user_nicename);
             $windowId.text(res.user.id);
         })
         //加载存桌面
 
-        //微信登录
-        if(_tool.isWechat()){
+        //微信和Android登录
+        if(_tool.isWechat() || _tool.isAndroid()){
             this.cancelSaveWindow();
         }
-        //IOS和Android登录
+        //IOS登录
         else{
             //判断token是否存在
             if (_tool.getUrlParam('token')){
@@ -44,8 +49,12 @@ var page = {
                         qd_code : _tool.getUrlParam('qd_code')
                     },function(data){
                         if (data.code !== 2000){
-                            window.location.href = 'http://h5.wan855.cn/login'
+                            window.location.href = 'http://h5.wan855.cn/login'+_tool.getUrlParam('token');
                         }
+
+                        // 判断是否是第一次进行保存操作
+                        _this.firstSaveWindow();
+
                     },'JSON')
                 }else{
                     //验证token是否失效
@@ -53,8 +62,12 @@ var page = {
                         token : _tool.getUrlParam('token')
                     },function(data){
                         if (data.code !== 2000){
-                            window.location.href = 'http://h5.wan855.cn/login'
+                            window.location.href = 'http://h5.wan855.cn/login'+_tool.getUrlParam('token');
                         }
+
+                        // 判断是否是第一次进行保存操作
+
+                        _this.firstSaveWindow()
                     },'JSON')
                 }
             }
@@ -91,7 +104,6 @@ var page = {
         //加载更多游戏
         $.get('/api/h5/game/hot',function (data) {
             var html = '';
-
             var dataJson = {
                 game : data
             }
@@ -108,7 +120,19 @@ var page = {
         var $windowClose      = $('#windowClose');
         var $windowRefresh    = $('#windowRefresh');
         var $float            = $('#float');
+        var $windowCollection = $('#windowCollection');
+        var _this = this;
         //收藏
+        $windowCollection.click(function () {
+            $.get('/api/h5/game/favorite',{gid:_this.data.gameId,sid:_tool.getUrlParam('id')},function (data) {
+                if (data.code === 2000){
+                    layer.msg(data.msg);
+                    console.log(data.msg);
+                }else{
+                    layer.msg(data.msg);
+                }
+            },'JSON')
+        })
 
         //关闭
         $windowClose.click(function () {
@@ -133,10 +157,27 @@ var page = {
                 $windowMainItem.eq(i).addClass('window-main-item-active');
             })
         })
+
     },
     cancelSaveWindow : function () {
         $('#windowMainNav li:eq(2)').hide();
         $('#windowMainList li:eq(2)').hide();
+    },
+    //判断是否是第一次进行存桌面操作
+    firstSaveWindow : function () {
+        var $windowWrap            = $('#windowWrap');              //窗口
+        var $float                 = $('#float');                   //悬浮球
+        if (!localStorage.getItem('first')){
+            //第一次
+            localStorage.setItem('first',1);
+            //加上token参数后打开window面板
+            $windowWrap.show();
+            $float.hide();
+            //调整到存桌面选项卡
+            $windowMainNavItem.removeClass('window-main-nav-item-active');
+            $('#windowMainNav li:eq(2)').addClass('window-main-nav-item-active')
+            $('#windowMainList li:eq(2)').addClass('window-main-item-active')
+        }
     }
 }
 $(function () {

@@ -20,6 +20,7 @@ var page = {
         var gid = '';
         $.get('/api/h5/game/play',{id:gameId},function (data) {
             $('.class-iframe').attr('src',data.url)
+            console.log('游戏URL'+data.url)
             gid = data.gid
         },'JSON')
 
