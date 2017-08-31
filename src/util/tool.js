@@ -76,6 +76,15 @@ var tools = {
         }else{
             return false;
         }
+    },
+    isSafari : function () {
+        var u = navigator.userAgent;
+        if (u.indexOf("Safari") > -1 && u.indexOf("Chrome") < 1){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }
 

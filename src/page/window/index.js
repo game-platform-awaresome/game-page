@@ -33,11 +33,11 @@ var page = {
         //加载存桌面
 
         //微信和Android登录
-        if(_tool.isWechat() || _tool.isAndroid()){
+        if(!_tool.isSafari()){
             this.cancelSaveWindow();
         }
         //IOS登录
-        else{
+        /*else{
             //判断token是否存在
             if (_tool.getUrlParam('token')){
                 // this.cancelSaveWindow();
@@ -87,7 +87,7 @@ var page = {
                     },'JSON')
                 })
             }
-        }
+        }*/
         //加载礼包内容
         var serverId = _tool.getUrlParam('id')        //获取区服ID
         $.get('/api/h5/game/play',{id:serverId},function (data) {

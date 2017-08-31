@@ -21,7 +21,11 @@ var page = {
         $.get('/api/h5/game/play',{id:gameId},function (data) {
             $('.class-iframe').attr('src',data.url)
             console.log('游戏URL'+data.url)
-            gid = data.gid
+            gid = data.gid;
+            $("#size57").attr('href',data.icon_list.icon_57);
+            $("#size72").attr('href',data.icon_list.icon_72);
+            $("#size144").attr('href',data.icon_list.icon_144);
+
         },'JSON')
 
         //如果从iframe收到message,显示支付页面
