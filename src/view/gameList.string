@@ -1,0 +1,13 @@
+{{#pop_game}}
+    <li>
+        <img src="{{img}}" alt="{{name}}" data-name='{{name}}' data-type='游戏返回弹出框' data-url={{url}}>
+        <p>{{name}}</p>
+    </li>
+{{/pop_game}}
+
+<li>
+    <a>
+        <img src="/public/more-game.png" alt="" data-url='/'>
+        <p>更多游戏</p>
+    </a>
+</li>

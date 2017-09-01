@@ -3,6 +3,7 @@ var _tool = require('util/tool.js')
 var _window = require('service/window-service.js');
 var packageHtml = require('./package.string');
 var moreGmaeHtml = require('./more-game.string');
+var gameListHtml = require('view/gameList.string');
 var page = {
     data : {
         gameId : ''      //游戏ID
@@ -88,18 +89,10 @@ var page = {
                 })
             }
         }*/
-        //加载礼包内容
-        var serverId = _tool.getUrlParam('id')        //获取区服ID
-        $.get('/api/h5/game/play',{id:serverId},function (data) {
-            _this.data.gameId = data.gid
-            $.get('/api/h5/game/cardlist',{gid:_this.data.gameId},function (data) {
-                var html = '';
-                //将对象转换成数组
-                data.gift = _tool.transformArray(data.gift)
-                html = _tool.renderHtml(packageHtml,data);
-                $('#packageWrap').html(html);
-            },'JSON')
-        },'JSON');
+
+        //加载礼包
+        this.loadPackage();
+
 
         //加载更多游戏
         $.get('/api/h5/game/hot',function (data) {
@@ -114,14 +107,38 @@ var page = {
 
 
     },
-    bindEvent : function () {
-        var $windowWrap       = $('#windowWrap');
-        var $windowCollection = $('#windowCollection');
-        var $windowClose      = $('#windowClose');
-        var $windowRefresh    = $('#windowRefresh');
-        var $float            = $('#float');
-        var $windowCollection = $('#windowCollection');
+    loadPackage : function () {
         var _this = this;
+        //加载礼包内容&&加载返回窗口中的游戏
+        var serverId = _tool.getUrlParam('id')        //获取区服ID
+        $.get('/api/h5/game/play',{id:serverId},function (data) {
+            _this.data.gameId = data.gid
+            //加载返回窗口中的游戏
+            $('#gameList').html(_tool.renderHtml(gameListHtml,data))
+
+            // 加载礼包内容
+            $.get('/api/h5/game/cardlist',{gid:_this.data.gameId},function (data) {
+                var html = '';
+                //将对象转换成数组
+
+                data.gift = _tool.transformArray(data.gift)
+                html = _tool.renderHtml(packageHtml,data);
+                $('#packageWrap').html(html);
+            },'JSON')
+        },'JSON');
+    },
+    bindEvent : function () {
+        var $windowWrap          = $('#windowWrap');
+        var $windowCollection    = $('#windowCollection');
+        var $windowClose         = $('#windowClose');
+        var $windowRefresh       = $('#windowRefresh');
+        var $float               = $('#float');
+        var _this = this;
+        var $windowChangeAccount = $('#windowChangeAccount');
+        //切换登录
+        $windowChangeAccount.click(function () {
+            window.location.href = '/login?redirect='+ encodeURIComponent(window.location.href);
+        })
         //收藏
         $windowCollection.click(function () {
             $.get('/api/h5/game/favorite',{gid:_this.data.gameId,sid:_tool.getUrlParam('id')},function (data) {
@@ -144,9 +161,9 @@ var page = {
             window.location.reload();
         })
 
-        $windowMainNavItem = $('.window-main-nav-item');
-        $windowMainItem = $('.window-main-item');
-
+        $windowMainNavItem  = $('.window-main-nav-item');
+        $windowMainItem     = $('.window-main-item');
+        $packageWrap        = $('#packageWrap');    //礼包 wrap
         $windowMainNavItem.each(function (i) {
             $(this).click(function () {
                 //切换导航样式
@@ -156,6 +173,16 @@ var page = {
                 $windowMainItem.removeClass('window-main-item-active')
                 $windowMainItem.eq(i).addClass('window-main-item-active');
             })
+        })
+        //礼包领取
+        $packageWrap.on('click','.package-get-package',function (e) {
+            $.get('/api/h5/game/getcard',{id : e.target.dataset.id},function (data) {
+                if (data.status === 1){
+                    layer.alert('礼包码 : ' + data.cardid);
+                    _this.loadPackage();
+                }
+            },'JSON');
+
         })
 
     },
