@@ -18,6 +18,7 @@
     <meta name="full-screen" content="true">
     <meta name="360-fullscreen" content="true">
     <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-title" content="" id="metaGameTitle">
     <title>游戏酱紫</title>
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="" id="size57">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="" id="siez72">
@@ -35,7 +36,7 @@
         <div>
             <div class="pay-head">
                 <span>确认支付方式</span>
-                <span onclick="windowControl.payClose()">×</span>
+                <span id="payClose">×</span>
             </div>
             <div class="pay-info">
                 <p id="pname" style="padding-bottom:10px;">月卡（月卡）</p>
@@ -49,13 +50,13 @@
                     <li><i class="pay-qq"></i><span>QQ钱包支付</span><em class=""></em></li>
                 </ol>
             </div>
-            <div class="pay-btn"><a href="javascript:;" id="readyPay" onclick="windowControl.starting()">立即支付</a>
+            <div class="pay-btn"><a href="javascript:;" id="readyPay">立即支付</a>
             </div>
             <div class="pay-tip cf">
                 <span id="puid"></span>
                 <p>
                     <input type="checkbox" id="pay-select" checked/><label for="pay-select">同意此协议</label>
-                    <a href="javascript:;" onclick="windowControl.urleOpen()">游戏酱紫玩家条例</a>
+                    <a href="javascript:;" id="rulesOpen">游戏酱紫玩家条例</a>
                 </p>
             </div>
         </div>
@@ -70,7 +71,7 @@
                    id="closeSaoma"></i>
             </p>
 
-            <img id="ewm" src="" width="250" height="250"/>
+            <img id="ewm" src="" width="200" height="200"/>
             <p class="pay-box-bottom">请使用[微信扫一扫]支付</p>
         </div>
     </div>

@@ -42,6 +42,7 @@ var page = {
             }
 
         });
+
         var windowControl = {
             payClose: function () {
                 $('#pay-box').css('display', 'none');
@@ -49,7 +50,7 @@ var page = {
             ruleClose: function () {
                 $('#dialogBox').css('display', 'none');
             },
-            urleOpen: function () {
+            ruleOpen: function () {
                 $('#dialogBox').css('display', 'block');
 
                 $("#backBanner").attr("src", "url")
@@ -57,7 +58,7 @@ var page = {
             },
             starting: function () {
                 order.paytype = 'wechat';
-                $.post('api/h5/Pay/beginpay', order, function (result) {
+                $.post('/api/h5/Pay/beginpay', order, function (result) {
                     if (result.code === 1) {
                         if (result.code_url) {
                             /*二维码支付*/
@@ -67,7 +68,9 @@ var page = {
                             console.log(order.oid + "shibai" + result.show)
                             //todo
                             checkpay(order.oid)
-                        } {
+                        }else if (result.mweb_url){
+                            window.location.href = result.mweb_url;
+                        }else{
                             wechatpay(result.data);//公众号支付
                         }
 
@@ -78,7 +81,13 @@ var page = {
                 }, 'json');
 
             }
-        }
+        };
+
+        //绑定支付
+        $('#readyPay').click(function () {
+            windowControl.starting();
+        })
+
         function checkpay(oid) {
             var s = setInterval(function () {
                 $.get('/api/h5/pay/checkpay/order/' + oid, function (data) {
@@ -90,6 +99,14 @@ var page = {
                 });
             }, 2000)
         }
+        //条例
+        $('#rulesOpen').click(function () {
+            windowControl.ruleOpen();
+        })
+        //关闭充值
+        $('#payClose').click(function () {
+            windowControl.payClose();
+        })
         $.get('/api/h5/index/gamead', function (data) {
             var url = data.slide_pic
             $('#backBanner').attr('src', url)

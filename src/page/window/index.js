@@ -13,6 +13,8 @@ var page = {
         this.bindEvent();
     },
     onLoad : function () {
+
+
         var _this = this;
         var $windowMainHeaderImage = $('#windowMainHeaderImage');   //用户头像
         var $windowUsername        = $('#windowUsername');          //用户名
@@ -24,13 +26,19 @@ var page = {
         var $windowMainNavItem     = $('.window-main-nav-item');    //导航列表的集合
         //获取用户信息
         $.get('/api/h5/user/getUserinfo',function (res) {
-            if (res.user === null) {
-                window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
+            if (!res.user) {
+                if(_tool.isWechat()){
+                    console.log('是微信'+  '/api/h5/user/oauthlogin/oauthtype/wechat?redirect=' + encodeURIComponent(window.location.href))
+                    window.location.href = '/api/h5/user/oauthlogin/oauthtype/wechat?redirect=' + encodeURIComponent(window.location.href)
+                }else{
+                    console.log('不是'+ '/login?redirect=' + encodeURIComponent(window.location.href))
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
+                }
             }
             $windowMainHeaderImage.attr('src',res.user.avatar);
             $windowUsername.text(res.user.user_nicename);
             $windowId.text(res.user.id);
-        })
+        },'JSON');
         //加载存桌面
 
         //微信和Android登录
@@ -113,6 +121,7 @@ var page = {
         var serverId = _tool.getUrlParam('id')        //获取区服ID
         $.get('/api/h5/game/play',{id:serverId},function (data) {
             _this.data.gameId = data.gid
+            $('#metaGameTitle').attr('content',data.game_info.game_name);
             //加载返回窗口中的游戏
             $('#gameList').html(_tool.renderHtml(gameListHtml,data))
 
@@ -178,7 +187,15 @@ var page = {
         $packageWrap.on('click','.package-get-package',function (e) {
             $.get('/api/h5/game/getcard',{id : e.target.dataset.id},function (data) {
                 if (data.status === 1){
-                    layer.alert('礼包码 : ' + data.cardid);
+
+                    layer.open({
+                        title: '领取提示'
+                        ,content: '<p style="color=#222;text-align: center">' +
+                        '<span style="padding-right: 1rem">兑换码</span>' +
+                        '<span style="-webkit-user-select:text;background: #ebebeb;padding: 0 .5rem;font-style: italic;">'+ data.cardid +'</span>' +
+                        '</p><p style="font-size: 12px;padding-top: 10px;line-height: 20px;text-align: center">复制兑换码,去游戏中使用</p>'
+                    });
+
                     _this.loadPackage();
                 }
             },'JSON');
