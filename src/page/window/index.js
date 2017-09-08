@@ -171,7 +171,8 @@ var page = {
         //加载礼包内容&&加载返回窗口中的游戏
         var serverId = _tool.getUrlParam('id')        //获取区服ID
         $.get('/api/h5/game/play',{id:serverId},function (data) {
-            _this.data.gameInfo = data
+            _this.data.gameInfo = data;
+            _this.loadWechatFunction();
             $('#metaGameTitle').attr('content',data.game_info.game_name);
             //加载返回窗口中的游戏
             $('#gameList').html(_tool.renderHtml(gameListHtml,data))
