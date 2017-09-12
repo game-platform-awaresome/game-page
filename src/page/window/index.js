@@ -159,7 +159,7 @@ var page = {
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
-                    alert('用户取消分享后执行的回调函数!')
+
                 }
             });
 
@@ -171,7 +171,7 @@ var page = {
         //加载礼包内容&&加载返回窗口中的游戏
         var serverId = _tool.getUrlParam('id')        //获取区服ID
         $.get('/api/h5/game/play',{id:serverId},function (data) {
-            _this.data.gameInfo = data;
+            _this.data.gameInfo = data.game_info;
             _this.loadWechatFunction();
             $('#metaGameTitle').attr('content',data.game_info.game_name);
             //加载返回窗口中的游戏
