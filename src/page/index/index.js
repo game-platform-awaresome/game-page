@@ -248,11 +248,11 @@ var page = {
                         },'JSON')
                     },
                     cancel: function () {
-                        alert('用户取消分享后执行的回调函数!')
+                        // alert('用户取消分享后执行的回调函数!')
                         // 用户取消分享后执行的回调函数
                     },
                     error:function () {
-                        alert('失败')
+                        // alert('失败')
                     }
 
                 })

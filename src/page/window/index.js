@@ -8,7 +8,8 @@ var page = {
     data : {
         gameInfo : {
 
-        }      //游戏ID
+        },
+        gid:''//游戏ID
     },
     init : function () {
         this.onLoad();
@@ -124,7 +125,7 @@ var page = {
 
             // 分享到朋友圈
             wx.onMenuShareTimeline({
-                title: _this.data.gameInfo.game_name+_this.data.gameInfo.game_excerpt, // 分享标题
+                title: _this.data.gameInfo.game_name + ' ' + _this.data.gameInfo.game_excerpt, // 分享标题
                 link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: _this.data.gameInfo.game_thumb, // 分享图标
                 success: function () {
@@ -172,16 +173,16 @@ var page = {
         var serverId = _tool.getUrlParam('id')        //获取区服ID
         $.get('/api/h5/game/play',{id:serverId},function (data) {
             _this.data.gameInfo = data.game_info;
+            _this.data.gid = data.gid;
             _this.loadWechatFunction();
             $('#metaGameTitle').attr('content',data.game_info.game_name);
             //加载返回窗口中的游戏
             $('#gameList').html(_tool.renderHtml(gameListHtml,data))
 
             // 加载礼包内容
-            $.get('/api/h5/game/cardlist',{gid:_this.data.gameInfo.gid},function (data) {
+            $.get('/api/h5/game/cardlist',{gid:_this.data.gid},function (data) {
                 var html = '';
                 //将对象转换成数组
-
                 data.gift = _tool.transformArray(data.gift)
                 html = _tool.renderHtml(packageHtml,data);
                 $('#packageWrap').html(html);
@@ -202,7 +203,7 @@ var page = {
         })
         //收藏
         $windowCollection.click(function () {
-            $.get('/api/h5/game/favorite',{gid:_this.data.gameInfo.gid,sid:_tool.getUrlParam('id')},function (data) {
+            $.get('/api/h5/game/favorite',{gid:_this.data.gid,sid:_tool.getUrlParam('id')},function (data) {
                 if (data.code === 2000){
                     layer.msg(data.msg);
                     console.log(data.msg);
