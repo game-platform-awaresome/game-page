@@ -1,5 +1,5 @@
 
-<ul>
+<ul id="moreGame">
 {{#game}}
     <li class="clearfix">
         <img src="{{img}}" alt="" class="more-game-img">
@@ -7,7 +7,7 @@
             <p class="more-game-name">{{name}}</p>
             <p class="more-game-content">{{content}}</p>
         </div>
-        <a href="{{url}}" class="more-game-start">开始</a>
+        <a data-href="{{url}}" class="more-game-start">开始</a>
     </li>
     {{/game}}
 </ul>

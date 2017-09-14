@@ -116,6 +116,7 @@ var page = {
             $('#moreGameWrap').html(html);
         },'JSON')
 
+        //开始游戏跳转
 
     },
     loadWechatFunction : function(){
@@ -188,6 +189,13 @@ var page = {
                 $('#packageWrap').html(html);
             },'JSON')
         },'JSON');
+    },
+    locationHref : function(){
+        var hotGame = document.getElementById('moreGame');
+        if (event.target.className == 'more-game-start'){
+            var dataHref = event.target.getAttribute('data-href');
+            window.location.href = dataHref;
+        }
     },
     bindEvent : function () {
         var $windowWrap          = $('#windowWrap');

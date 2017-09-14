@@ -230,36 +230,6 @@ var page = {
 
 
 
-        $.get('/api/h5/index/getwechatsdkconf?route='+ encodeURIComponent(window.location.pathname+window.location.search),function (data) {
-            console.log(data)
-            wx.config(data)
-            /*s*/
-            $.get('/api/h5/game/gameinfo/',{gid : gid},function (data) {
-                wx.onMenuShareTimeline({
-                    title: data.name, // 分享标题
-                    link: window.location.protocol + "//" + window.location.host + data.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                    imgUrl: data.img, // 分享图标
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                        $.get('/api/Integral/Task/share',function(data){
-                            if(data === '200'){
-
-                            }
-                        },'JSON')
-                    },
-                    cancel: function () {
-                        // alert('用户取消分享后执行的回调函数!')
-                        // 用户取消分享后执行的回调函数
-                    },
-                    error:function () {
-                        // alert('失败')
-                    }
-
-                })
-            },'JSON')
-
-            /*e*/
-        },'JSON')
 
 
         /**
