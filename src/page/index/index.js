@@ -12,7 +12,14 @@ var page = {
         this.bindEvent();
     },
     onLoad : function () {
-
+        if(tools.isWechat()){
+            $('.paytype-alipay').css('display','none');
+        }
+        setTimeout(function () {
+            $(".game-loading").css({
+                display:"none"
+            });
+        },4000);
     },
     bindEvent : function () {
         // 返回URL地址
@@ -29,11 +36,12 @@ var page = {
         },'JSON')
 
         //如果从iframe收到message,显示支付页面
-        var order = "";
+        var order = {};
         window.addEventListener("message", function (event) {
             if (event.data.amount > 0) {
                 console.log(event);
                 order = event.data;
+                order.paytype = 'wechat';
                 console.log("Hello from " + event.data);
                 console.log("Hello from " + event.data.name);
                 $('#pay-box').css('display', 'block');
@@ -42,6 +50,16 @@ var page = {
             }
 
         });
+
+        //改变支付类型
+        $("#pay-list li").click(function () {
+            order.paytype = $(this).attr('data-type');
+            $("#pay-list li").find('span').removeClass('pay-select-active');
+            $(this).find('span').addClass('pay-select-active');
+
+            console.log(order.paytype)
+        })
+
 
         var windowControl = {
             payClose: function () {
@@ -57,7 +75,7 @@ var page = {
                 console.log(url);
             },
             starting: function () {
-                order.paytype = 'wechat';
+
                 $.post('/api/h5/Pay/beginpay', order, function (result) {
                     if (result.code === 1) {
                         if (result.code_url) {
@@ -79,7 +97,6 @@ var page = {
                         alert(result.show)
                     }
                 }, 'json');
-
             }
         };
 

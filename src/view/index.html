@@ -30,6 +30,9 @@
     <link rel="icon" type="image/x-icon" href="/public/images/icon/favicon.ico" media="screen">
 </head>
 <body>
+    <!--loading S-->
+    <div class="game-loading"></div>
+    <!--loading E-->
     <!--游戏iframe S-->
     <div class="game-play-page">
         <iframe class="class-iframe" style="width:100%;height:100%;" src=""></iframe>
@@ -48,12 +51,10 @@
                 <p id="price">¥ 25.00</p>
             </div>
             <div class="pay-mode">
-                <ol id="pay-list" class="cf">
-                    <li style="display: list-item;"><i class="pay-wx"></i><span>微信支付</span>
-                        <!-- <em class="icon-check"></em> --></li>
-                    <!-- <li style="display: list-item;"><i class="pay-zfb"></i><span>支付宝支付</span><em class=""></em></li> -->
-                    <li><i class="pay-qq"></i><span>QQ钱包支付</span><em class=""></em></li>
-                </ol>
+                <ul id="pay-list">
+                    <li data-type="wechat"><s></s>微信支付  <span class="pay-select pay-select-active"></span></li>
+                    <!--<li class="paytype-alipay" data-type="alipay"><s></s>支付宝支付 <span class="pay-select"></span></li>-->
+                </ul>
             </div>
             <div class="pay-btn"><a href="javascript:;" id="readyPay">立即支付</a>
             </div>

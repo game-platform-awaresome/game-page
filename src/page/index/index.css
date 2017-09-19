@@ -113,7 +113,6 @@
     padding: 5px 0;
     border-top: 1px solid #e5e5e7;
     margin-left: 6%;
-    display: none;
 }
 
 /*.pay-mode li i {
@@ -156,6 +155,33 @@
     margin: 5px 10px 0 0;
     position: relative;
     font-size: 21px;
+}
+#pay-list li s{
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+#pay-list li:first-of-type s{
+    background: url("../../image/pay-select-wechat.png") 0 0 no-repeat;
+    background-size: cover;
+}
+#pay-list li:last-of-type s{
+    background: url("../../image/pay-select-ali.png") 0 0 no-repeat;
+    background-size: cover;
+}
+#pay-list li .pay-select{
+    display: block;
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-right: 30px;
+}
+#pay-list li .pay-select.pay-select-active{
+    background: url("../../image/pay-makesure.png") 0 0 no-repeat;
+    background-size: cover;
 }
 .pay-btn {
     width: 82%;
@@ -353,4 +379,26 @@
 }
 .saoma-close{
     display: block;top:5px;position: absolute;width: 25px;height: 25px;background: url("../../image/delete.png") center center no-repeat ;right: 5px;background-size: cover;
+}
+
+.game-loading{
+    position: absolute;
+    z-index: 10001;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url("../../image/game-loading.jpg") center center no-repeat;
+    background-size: cover;
+    opacity: 1;
+    animation: disappear 1s 3s forwards ;
+}
+@keyframes disappear
+{
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
