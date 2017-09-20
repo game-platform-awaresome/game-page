@@ -92,6 +92,8 @@ var page = {
                             wechatpay(result.data);//公众号支付
                         }
 
+                    }else if(result.code === 2000){
+                        $("#alipay-content").html(result.form);
                     } else {
                         console.log(result.code + "shibai" + result.show)
                         alert(result.show)

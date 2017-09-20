@@ -163,11 +163,11 @@
     height: 30px;
     margin-right: 10px;
 }
-#pay-list li:first-of-type s{
+.paytype-wechat s{
     background: url("../../image/pay-select-wechat.png") 0 0 no-repeat;
     background-size: cover;
 }
-#pay-list li:last-of-type s{
+.paytype-alipay s{
     background: url("../../image/pay-select-ali.png") 0 0 no-repeat;
     background-size: cover;
 }
@@ -388,7 +388,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: url("../../image/game-loading.jpg") center center no-repeat;
+    background: url("../../image/game-loading.gif") center center no-repeat;
     background-size: cover;
     opacity: 1;
     animation: disappear 1s 3s forwards ;
