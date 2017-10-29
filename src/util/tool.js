@@ -77,6 +77,7 @@ var tools = {
             return false;
         }
     },
+    //判断是否是safari
     isSafari : function () {
         var u = navigator.userAgent;
         if (u.indexOf("Safari") > -1 && u.indexOf("Chrome") < 1){
@@ -84,8 +85,17 @@ var tools = {
         }else{
             return false;
         }
-
-    }
+    },
+    //判断是否是PC
+    isPC : function (){    
+        var userAgentInfo = navigator.userAgent;  
+        var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");    
+        var flag = true;    
+        for (var v = 0; v < Agents.length; v++) {    
+            if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }    
+        }    
+        return flag;    
+    }  
 }
 
 module.exports = tools;

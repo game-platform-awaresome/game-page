@@ -44,8 +44,8 @@ var page = {
         },'JSON');
         //加载存桌面
 
-        //微信和Android登录
-        if(!_tool.isSafari()){
+        //微信和Android登录(修改为PC环境下不显示)
+        if(_tool.isPC()){
             this.cancelSaveWindow();
         }
         //IOS登录
@@ -209,6 +209,11 @@ var page = {
         var $windowChangeAccount = $('#windowChangeAccount');
         //切换登录
         $windowChangeAccount.click(function () {
+            $.get('/api/h5/user/logout',function(data){
+                if(data.code === 2000) {
+                    window.location.href = '/login?redirect='+ encodeURIComponent(window.location.href);
+                }
+            })
             window.location.href = '/login?redirect='+ encodeURIComponent(window.location.href);
         })
         //收藏
