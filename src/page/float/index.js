@@ -41,6 +41,7 @@ var page = {
         var isMouseDown = false;
         var lastPoint = {};
         $("#float").on("mousedown",function(e){
+            e.stopPropagation();
             console.log('按下')
 
             isMouseDown = true;
@@ -55,6 +56,7 @@ var page = {
         })
 
         $('body').on("mousemove",function(e){
+            e.stopPropagation();
             console.log('执行body')
             if(isMouseDown){
                 var $float = $(".float");
@@ -72,7 +74,8 @@ var page = {
                     lastPoint.y = e.pageY;
                 }
             }
-        }).on("mouseup",function(){
+        }).on("mouseup",function(e){
+            e.stopPropagation();
             $('iframe').css('pointer-events','auto');
 
             isMouseDown = false;
@@ -88,6 +91,7 @@ var page = {
         var lastPoint = {};
 
         $("#float").on("touchstart",function(e){
+            e.stopPropagation();
             console.log('按下')
             isMouseDown = true;
             lastPoint.x = parseInt(e.targetTouches[0].pageX);
@@ -101,6 +105,7 @@ var page = {
         })
 
         $('body').on("touchmove",function(e){
+            e.stopPropagation();
             console.log('执行body')
             if(isMouseDown){
                 var $float = $(".float");
@@ -118,7 +123,8 @@ var page = {
                     lastPoint.y = parseInt(e.targetTouches[0].pageY);
                 }
             }
-        }).on("touchend",function(){
+        }).on("touchend",function(e){
+            e.stopPropagation();
             $('iframe').css('pointer-events','auto');
             isMouseDown = false;
             lastPoint = {}

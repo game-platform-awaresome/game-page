@@ -1,7 +1,8 @@
 
 .float{
     position: absolute;
-    top:40px;
+    top:50%;
+    margin-top: -28px;
     right: 0;
     z-index: 9999;
     width: 40px;

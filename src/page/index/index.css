@@ -354,6 +354,7 @@
 }
 .back-box ul {
     text-align: center;
+    font-size: 0;
 }
 .back-box ul li {
     display: inline-block;
