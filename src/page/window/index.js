@@ -170,9 +170,15 @@ var page = {
     // 加载礼包
     loadPackage : function () {
         var _this = this;
+        var obj = {};
+        var serverId = _tool.getUrlParam('id');        //获取区服ID
+        obj.id = serverId;
+        if(_tool.getUrlParam('qd_code')){
+            obj.qd_code = _tool.getUrlParam('qd_code');
+        }
         //加载礼包内容&&加载返回窗口中的游戏
-        var serverId = _tool.getUrlParam('id')        //获取区服ID
-        $.get('/api/h5/game/play',{id:serverId},function (data) {
+
+        $.get('/api/h5/game/play',obj,function (data) {
             _this.data.gameInfo = data.game_info;
             _this.data.gid = data.gid;
             _this.loadWechatFunction();
@@ -186,8 +192,10 @@ var page = {
                 //将对象转换成数组
                 data.gift = _tool.transformArray(data.gift)
                 html = _tool.renderHtml(packageHtml,data);
+                console.log('加载礼包');
                 $('#packageWrap').html(html);
-            },'JSON')
+
+            },'JSON');
         },'JSON');
     },
     locationHref : function(){

@@ -403,3 +403,8 @@
         opacity: 0;
     }
 }
+@media only screen and (max-width:750px) {
+    .game-loading{
+        background: url("../../image/mobile_loading.gif") center center no-repeat;
+    }
+}
