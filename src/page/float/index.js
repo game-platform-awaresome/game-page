@@ -42,7 +42,7 @@ var page = {
         var lastPoint = {};
         $("#float").on("mousedown",function(e){
             e.stopPropagation();
-            console.log('按下')
+            // console.log('按下')
 
             isMouseDown = true;
             lastPoint.x = e.pageX;
@@ -57,7 +57,7 @@ var page = {
 
         $('body').on("mousemove",function(e){
             e.stopPropagation();
-            console.log('执行body')
+            // console.log('执行body')
             if(isMouseDown){
                 var $float = $(".float");
                 var targetX = parseInt($float.css('left')) + e.pageX - lastPoint.x;
@@ -92,11 +92,11 @@ var page = {
 
         $("#float").on("touchstart",function(e){
             e.stopPropagation();
-            console.log('按下')
+            // console.log('按下')
             isMouseDown = true;
             lastPoint.x = parseInt(e.targetTouches[0].pageX);
             lastPoint.y = parseInt(e.targetTouches[0].pageY) ;
-            console.log(e.targetTouches[0])
+            // console.log(e.targetTouches[0])
             $(this).css({
                 'right':'',
                 'left' : parseInt(e.targetTouches[0].pageX)- parseInt(e.targetTouches[0].offsetX)
@@ -106,7 +106,7 @@ var page = {
 
         $('body').on("touchmove",function(e){
             e.stopPropagation();
-            console.log('执行body')
+            // console.log('执行body')
             if(isMouseDown){
                 var $float = $(".float");
                 var targetX = parseInt($float.css('left')) + parseInt(e.targetTouches[0].pageX) - lastPoint.x;

@@ -31,10 +31,10 @@ var page = {
         $.get('/api/h5/user/getUserinfo',function (res) {
             if (!res.user) {
                 if(_tool.isWechat()){
-                    console.log('是微信'+  '/api/h5/user/oauthlogin/oauthtype/wechat?redirect=' + encodeURIComponent(window.location.href))
+                    // console.log('是微信'+  '/api/h5/user/oauthlogin/oauthtype/wechat?redirect=' + encodeURIComponent(window.location.href))
                     window.location.href = '/api/h5/user/oauthlogin/oauthtype/wechat?redirect=' + encodeURIComponent(window.location.href)
                 }else{
-                    console.log('不是'+ '/login?redirect=' + encodeURIComponent(window.location.href))
+                    // console.log('不是'+ '/login?redirect=' + encodeURIComponent(window.location.href))
                     window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
                 }
             }
@@ -48,73 +48,9 @@ var page = {
         if(_tool.isPC()){
             this.cancelSaveWindow();
         }
-        //IOS登录
-        /*else{
-            //判断token是否存在
-            if (_tool.getUrlParam('token')){
-                // this.cancelSaveWindow();
-                // quickLogin 是否有qd_code
-                if (_tool.getUrlParam('qd_code')){
-                    //验证token是否失效
-                    $.get('/api/h5/game/quickLogin',{
-                        token : _tool.getUrlParam('token'),
-                        qd_code : _tool.getUrlParam('qd_code')
-                    },function(data){
-                        if (data.code !== 2000){
-                            window.location.href = 'http://h5.wan855.cn/login'+_tool.getUrlParam('token');
-                        }
-
-                        // 判断是否是第一次进行保存操作
-                        _this.firstSaveWindow();
-
-                    },'JSON')
-                }else{
-                    //验证token是否失效
-                    $.get('/api/h5/game/quickLogin',{
-                        token : _tool.getUrlParam('token')
-                    },function(data){
-                        if (data.code !== 2000){
-                            window.location.href = 'http://h5.wan855.cn/login'+_tool.getUrlParam('token');
-                        }
-
-                        // 判断是否是第一次进行保存操作
-
-                        _this.firstSaveWindow()
-                    },'JSON')
-                }
-            }
-            //token不存在的情况
-            else {
-                $('#saveWindowBtn').click(function () {
-                    $.get('/api/h5/game/token',{
-                        gid : _this.data.gameId,
-                        sid : _tool.getUrlParam('id')
-                    },function (data) {
-                        var token = data.token;
-                        // var theHtml = window.location.href + '&token=' + token;
-                        var theHtml = window.location.protocol + '//' + window.location.host + window.location.pathname + window.location.search + '&token=' + token;
-                        console.log(theHtml);
-                        //重新加载页面
-                        window.location.href = theHtml;
-                    },'JSON')
-                })
-            }
-        }*/
-
+       
         //加载礼包
         this.loadPackage();
-
-
-        //加载更多游戏
-        $.get('/api/h5/game/hot',function (data) {
-            var html = '';
-            var dataJson = {
-                game : data
-            }
-            console.log(dataJson)
-            html = _tool.renderHtml(moreGmaeHtml,dataJson);
-            $('#moreGameWrap').html(html);
-        },'JSON')
 
         //开始游戏跳转
         this.locationHref();
@@ -167,6 +103,18 @@ var page = {
 
         },'JSON');
     },
+    //加载更多游戏
+    loadMoreGame : function() { 
+        $.get('/api/h5/game/hot',function (data) {
+            var html = '';
+            var dataJson = {
+                game : data
+            }
+            // console.log(dataJson)
+            html = _tool.renderHtml(moreGmaeHtml,dataJson);
+            $('#moreGameWrap').html(html);
+        },'JSON')
+    },
     // 加载礼包
     loadPackage : function () {
         var _this = this;
@@ -187,12 +135,13 @@ var page = {
             $('#gameList').html(_tool.renderHtml(gameListHtml,data))
 
             // 加载礼包内容
+            /* 修改为click加载方式  */
             $.get('/api/h5/game/cardlist',{gid:_this.data.gid},function (data) {
                 var html = '';
                 //将对象转换成数组
                 data.gift = _tool.transformArray(data.gift)
                 html = _tool.renderHtml(packageHtml,data);
-                console.log('加载礼包');
+                // console.log('加载礼包');
                 $('#packageWrap').html(html);
 
             },'JSON');
@@ -214,6 +163,7 @@ var page = {
         var $windowRefresh       = $('#windowRefresh');
         var $float               = $('#float');
         var _this = this;
+        var $moreGame            = $('#moreGame');
         var $windowChangeAccount = $('#windowChangeAccount');
         //切换登录
         $windowChangeAccount.click(function () {
@@ -229,7 +179,7 @@ var page = {
             $.get('/api/h5/game/favorite',{gid:_this.data.gid,sid:_tool.getUrlParam('id')},function (data) {
                 if (data.code === 2000){
                     layer.msg(data.msg);
-                    console.log(data.msg);
+                    // console.log(data.msg);
                 }else{
                     layer.msg(data.msg);
                 }
@@ -249,6 +199,7 @@ var page = {
         $windowMainNavItem  = $('.window-main-nav-item');
         $windowMainItem     = $('.window-main-item');
         $packageWrap        = $('#packageWrap');    //礼包 wrap
+
         $windowMainNavItem.each(function (i) {
             $(this).click(function () {
                 //切换导航样式
@@ -276,6 +227,10 @@ var page = {
                 }
             },'JSON');
 
+        });
+        //加载更多游戏
+        $moreGame.on('click',function(){
+            _this.loadMoreGame();
         })
 
     },

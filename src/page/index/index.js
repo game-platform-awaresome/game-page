@@ -24,17 +24,17 @@ var page = {
     bindEvent : function () {
         var _this = this;
         var obj = {};
-        var serverId = _tool.getUrlParam('id');        //获取区服ID
+        var serverId = tools.getUrlParam('id');        //获取区服ID
         obj.id = serverId;
-        if(_tool.getUrlParam('qd_code')){
-            obj.qd_code = _tool.getUrlParam('qd_code');
+        if(tools.getUrlParam('qd_code')){
+            obj.qd_code = tools.getUrlParam('qd_code');
         }
         var gid = '';
 
 
         $.get('/api/h5/game/play',obj,function (data) {
             $('.class-iframe').attr('src',data.url)
-            console.log('游戏URL'+data.url)
+            // console.log('游戏URL'+data.url)
             gid = data.gid;
             $("#size57").attr('href',data.icon_list.icon_57);
             $("#size72").attr('href',data.icon_list.icon_72);
@@ -46,11 +46,9 @@ var page = {
         var order = {};
         window.addEventListener("message", function (event) {
             if (event.data.amount > 0) {
-                console.log(event);
+
                 order = event.data;
                 order.paytype = 'wechat';
-                console.log("Hello from " + event.data);
-                console.log("Hello from " + event.data.name);
                 $('#pay-box').css('display', 'block');
                 $('#pname').html(event.data.name);
                 $('#price').html('¥ ' + event.data.amount);
@@ -64,7 +62,6 @@ var page = {
             $("#pay-list li").find('span').removeClass('pay-select-active');
             $(this).find('span').addClass('pay-select-active');
 
-            console.log(order.paytype)
         })
 
 
@@ -79,7 +76,6 @@ var page = {
                 $('#dialogBox').css('display', 'block');
 
                 $("#backBanner").attr("src", "url")
-                console.log(url);
             },
             starting: function () {
 
@@ -90,7 +86,6 @@ var page = {
                             $('#ewm').attr('src', "http://www.kukewan.com/pay/png?url=" + result.code_url);
                             $('#saoma').show();
                             //定时发送请求检查订单状态
-                            console.log(order.oid + "shibai" + result.show)
                             //todo
                             checkpay(order.oid)
                         }else if (result.mweb_url){
@@ -102,7 +97,7 @@ var page = {
                     }else if(result.code === 2000){
                         $("#alipay-content").html(result.form);
                     } else {
-                        console.log(result.code + "shibai" + result.show)
+                        // console.log(result.code + "shibai" + result.show)
                         alert(result.show)
                     }
                 }, 'json');
@@ -153,7 +148,7 @@ var page = {
             open: function () {
                 $('.back').css('display', 'block');
 
-                console.log('ok')
+                // console.log('ok')
             },
             close: function () {
                 $('.back').css('display', 'none');
@@ -178,10 +173,10 @@ var page = {
         function isWechat() {
             var ua = navigator.userAgent.toLowerCase();
             if (ua.match(/MicroMessenger/i) === 'micromessenger') {
-                console.log('是微信浏览器')
+                // console.log('是微信浏览器')
                 return true
             } else {
-                console.log('不是微信浏览器')
+                // console.log('不是微信浏览器')
                 return false
             }
         }
@@ -190,14 +185,14 @@ var page = {
 
         $(".noAlert").click(function () {
             if ($('#selectOneDay').attr('checked')) {
-                console.log('delete cookie')
+                // console.log('delete cookie')
                 $.removeCookie('oneday', {path: '/'})
                 $('#selectOneDay').removeAttr('checked')
             } else {
                 $('#selectOneDay').attr('checked', 'checked')
-                console.log('开始设置cookie')
+                // console.log('开始设置cookie')
                 $.cookie('oneday', 'abc', {path: '/', expires: 1})
-                console.log('OK')
+                // console.log('OK')
             }
 
         })
@@ -209,7 +204,7 @@ var page = {
             e.preventDefault()
 
             if (!$.cookie("oneday")) {
-                console.log(history.length)
+                // console.log(history.length)
                 layers.open()
             }
 
@@ -232,7 +227,7 @@ var page = {
             if ($($target).attr('data-url') === '/') {
                 window.location.href = '/'
             }
-            console.log($target.nodeName)
+            // console.log($target.nodeName)
             if ($target.nodeName === 'IMG') {
                 $.ajax({
                     url: '/api/h5/index/buttonClick',
