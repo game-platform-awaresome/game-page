@@ -22,10 +22,17 @@ var page = {
         },4000);
     },
     bindEvent : function () {
-        // 返回URL地址
-        var gameId = tools.getUrlParam('id')        //获取区服ID
+        var _this = this;
+        var obj = {};
+        var serverId = _tool.getUrlParam('id');        //获取区服ID
+        obj.id = serverId;
+        if(_tool.getUrlParam('qd_code')){
+            obj.qd_code = _tool.getUrlParam('qd_code');
+        }
         var gid = '';
-        $.get('/api/h5/game/play',{id:gameId},function (data) {
+
+
+        $.get('/api/h5/game/play',obj,function (data) {
             $('.class-iframe').attr('src',data.url)
             console.log('游戏URL'+data.url)
             gid = data.gid;

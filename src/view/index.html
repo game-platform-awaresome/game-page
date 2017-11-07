@@ -31,7 +31,9 @@
 </head>
 <body ontouchmove="event.preventDefault()">
     <!--loading S-->
-    <div class="game-loading"></div>
+    <div class="game-loading">
+        <div class="game-loading-logo"></div>
+    </div>
     <!--loading E-->
     <!--游戏iframe S-->
     <div class="game-play-page">
@@ -75,8 +77,8 @@
     <div class="pay-box" id="saoma" style="display: none;">
         <div style="position: relative;">
             <p class="pay-box-tit">微信扫码支付
-                <i class="saoma-close"
-                   id="closeSaoma"></i>
+                <div class="saoma-close"
+                   id="closeSaoma"></div>
             </p>
 
             <img id="ewm" src="" width="200" height="200"/>

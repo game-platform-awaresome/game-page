@@ -389,10 +389,25 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: url("../../image/game-loading.gif") center center no-repeat;
-    background-size: cover;
+    background: radial-gradient(circle closest-corner at 50% 40%,#49b0f9,#266cb2);
     opacity: 1;
     animation: disappear 1s 3s forwards ;
+    text-align: center;
+}
+.game-loading .game-loading-logo{
+    margin: 15% auto 0;
+    width: 525px;
+    height: 210px;
+    background: url('../../image/loading-logo.gif') 0 0 no-repeat;
+    background-size: cover;
+    
+}
+@media only screen and (max-width:750px){
+    .game-loading .game-loading-logo{
+        margin: 40% auto 0;
+        width: 375px;
+        height: 150px;
+    }
 }
 @keyframes disappear
 {
@@ -401,10 +416,5 @@
     }
     to {
         opacity: 0;
-    }
-}
-@media only screen and (max-width:750px) {
-    .game-loading{
-        background: url("../../image/mobile_loading.gif") center center no-repeat;
     }
 }
