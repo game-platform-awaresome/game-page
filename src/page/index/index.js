@@ -124,8 +124,12 @@ var page = {
         $('#rulesOpen').click(function () {
             windowControl.ruleOpen();
         })
+        //关闭扫码
+        $('#closeSaoma').click(function () {   
+            $('#saoma').hide();
+        });
         //关闭充值
-        $('#payClose').click(function () {
+        $('#pay-box').click(function () {
             windowControl.payClose();
         })
         $.get('/api/h5/index/gamead', function (data) {
@@ -162,7 +166,7 @@ var page = {
 
             },
         }
-        $('.back-btn-close').click(function () {
+        $('.back-btn-fault').click(function () {
             layers.close()
         })
         $('.back-btn-leave').click(function () {
@@ -218,7 +222,7 @@ var page = {
             window.history.pushState(state, state.title, state.url);
         }
         $('#closeSaoma').click(function (event) {
-            $("#saoma").css('display', 'none');
+            $("#saoma").hide();
             clearInterval(s);
         });
         /*点击数量*/

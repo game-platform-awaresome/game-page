@@ -168,8 +168,9 @@ var page = {
         //切换登录
         $windowChangeAccount.click(function () {
             $.get('/api/h5/user/logout',function(data){
-                if(data.code === 2000) {
+                if(data.code == 2000) {
                     window.location.href = '/login?redirect='+ encodeURIComponent(window.location.href);
+                    console.log('logout')
                 }
             })
             window.location.href = '/login?redirect='+ encodeURIComponent(window.location.href);

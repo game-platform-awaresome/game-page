@@ -56,7 +56,7 @@ table {
 body {
     overflow: hidden;
     position: relative;
-
+    background-color: #000;
 }
 
 a {

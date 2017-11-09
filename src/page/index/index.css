@@ -22,7 +22,7 @@
     position: fixed;
     z-index: 10001;
 
-    height: 300px;
+
     width: 400px;
     top: 50%;
     left: 50%;
@@ -35,7 +35,7 @@
     .pay-box > div, .dialog-box > div {
         position: fixed;
         z-index: 10001;
-        height: 300px;
+
         width: 80%;
         top: 50%;
         left: 50%;
@@ -339,12 +339,17 @@
 }
 .back-btn-fault {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     right: 5px;
     top: 5px;
     color: #fff;
+    border-radius: 50%;
+    background: rgba(95,69,88,.9) url(../../image/btn_del.png) center center no-repeat;
+    background-size: 70%;
+
 }
+
 .fa-fw {
     width: 20px;
 }
@@ -379,7 +384,7 @@
     transform: translateY(2px);
 }
 .saoma-close{
-    display: block;top:5px;position: absolute;width: 25px;height: 25px;background: url("../../image/delete.png") center center no-repeat ;right: 5px;background-size: cover;
+    display: block;top:5px;position: absolute;width: 25px;height: 25px;z-index: 2; background: url("../../image/delete.png") center center no-repeat ;right: 5px;background-size: cover;
 }
 
 .game-loading{
