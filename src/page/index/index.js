@@ -129,7 +129,7 @@ var page = {
             $('#saoma').hide();
         });
         //关闭充值
-        $('#pay-box').click(function () {
+        $('#payClose').click(function () {
             windowControl.payClose();
         })
         $.get('/api/h5/index/gamead', function (data) {
