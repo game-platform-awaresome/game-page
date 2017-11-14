@@ -10,14 +10,14 @@
 }
 .window-main{
     float: left;
-    width: calc(100% - 60px);
+    width: calc(100% - 53px);
     height: 100%;
 }
 /*主导航*/
 .window-nav{
     position: relative;
     float: right;
-    width: 60px;
+    width: 53px;
     height: 100%;
     background: #1a191e;
 
@@ -35,9 +35,10 @@
 }
 .window-nav-box a .window-nav-function{
     display: block;
-    height: 60px;
-    width: 60px;
-    background-size: 80%;
+    height: 35px;
+    width: 35px;
+    margin:0 auto;
+    background-size: 100%;
 }
 .window-nav-function.collection{
     background: url("../../image/window-nav-collection.png") center 0 no-repeat;
@@ -54,124 +55,130 @@
     width: 100%;
     text-align: center;
     bottom:10px;
-    font-size: 16px;
+    font-size: 10px;
     color: #fff;
-    margin-bottom: 10px;
+    line-height: 20px;
+    margin-bottom: 21px;
 }
 
 
 /*头部*/
 .window-main-header{
     position: relative;
-    height: 60px;
-    border-bottom: 1px solid #ccc;
-    padding: 5px 10px;
+    height: 55px;
+    border-bottom: 1px solid #eee;
+    padding: 9px 7.5px;
+    box-sizing: border-box;
 }
 .window-main-header-image{
     display: block;
     float: left;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 35px;
+    height: 35px;
 }
 .window-main-userinfo-box{
     float: left;
-    padding: 10px 0 0 10px;
+    padding: 0 0 0 10px;
 }
 .window-username{
     display: block;
     height: 20px;
     line-height: 20px;
-    font-size: 16px;
+    font-size: 12px;
     color: #333;
     width: 130px;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 .window-id{
     display: block;
     height: 16px;
     line-height: 16px;
-    margin-top: 5px;
-    text-indent: 20px;
-    font-size: 14px;
-    color: #999;
+    text-indent: 16px;
+    font-size: 12px;
+    color: #eece6c;
     background: url("../../image/user_id.png") 0 center no-repeat;
+    background-size: 12px 12px;
 }
 .window-gohome{
     position: absolute;
     top:50%;
     right: 80px;
-    margin-top: -15px;
+    margin-top: -11.25px;
     background: url("../../image/gohome.png") 0 center no-repeat;
     background-size: cover;
-    width: 33px;
-    height: 30px;
+    width: 22.5px;
+    height: 22.5px;
 }
 .window-change-account{
     position: absolute;
-    width: 60px;
-    height: 30px;
+    width: 58px;
+    height: 22px;
     top: 50%;
-    margin-top: -15px;
+    margin-top: -11px;
     border:1px solid #1c81dd;
     right: 10px;
     border-radius: 4px;
-    font-size: 14px;
-    line-height: 30px;
+    font-size: 12px;
+    line-height: 20px;
     text-align: center;
     color: #1c81dd;
+    box-sizing: border-box;
 }
 /*导航*/
 .window-main-nav{
-    border-bottom: 1px solid #ccc;
+    display: flex;
+    border-bottom: 1px solid #eee;
 }
 .window-main-nav .window-main-nav-item{
-    width: 25%;
-    float: left;
+    flex: 1;
     position: relative;
-    height: 80px;
+    height: 54px;
 }
 .nav-image{
-    width: 60px;
-    height: 60px;
-    margin:0 auto;
-    background-size: 80%!important;
+    width: 20px;
+    height: 20px;
+    margin:9px auto 0;
+    background-size: 100%!important;
 }
 .window-main-nav-item.customer-service .nav-image{
     background: url("../../image/customer-service.png") center center no-repeat;
 }
-.window-main-nav-item-active.customer-service .nav-image{
+/* .window-main-nav-item-active.customer-service .nav-image{
     background: url("../../image/customer-service-active.png") center center no-repeat;
-}
+} */
 .window-main-nav-item.package .nav-image{
     background: url("../../image/package.png") center center no-repeat;
 }
-.window-main-nav-item-active.package .nav-image{
+/* .window-main-nav-item-active.package .nav-image{
     background: url("../../image/package-active.png") center center no-repeat;
-}
+} */
 .window-main-nav-item.save-window .nav-image{
     background: url("../../image/save-window.png") center center no-repeat;
 }
-.window-main-nav-item-active.save-window .nav-image{
+/* .window-main-nav-item-active.save-window .nav-image{
     background: url("../../image/save-window-active.png") center center no-repeat;
-}
+} */
 .window-main-nav-item.more-game .nav-image{
     background: url("../../image/more-game.png") center center no-repeat;
 }
-.window-main-nav-item-active.more-game .nav-image{
+/* .window-main-nav-item-active.more-game .nav-image{
     background: url("../../image/more-game-active.png") center center no-repeat;
-}
+} */
 .window-main-nav .window-main-nav-item p{
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
-    font-size: 14px;
+    font-size: 11px;
     text-align: center;
-    height: 24px;
-    line-height: 24px;
-    bottom: 0;
+    height: 20px;
+    line-height: 20px;
     color: #000;
-    margin-bottom: 5px;
+
+}
+.window-main-nav .window-main-nav-item.window-main-nav-item-active{
+    background-color: #eee;
 }
 .window-main-nav .window-main-nav-item.window-main-nav-item-active p{
     color: #9871be;
@@ -191,42 +198,57 @@
 }
 
 /*客服*/
-.window-main-item-title{
-    height: 60px;
-    border-bottom: 1px solid #ccc;
-    line-height: 60px;
-    background: url("../../image/customer-service-logo.png") 20px center no-repeat;
-    background-size: 40px;
+.window-main-item-title-wrap{
+    padding: 11px 20px;
 }
+.window-main-item-title{
+    height: 20px;
+    line-height: 20px;
+    background-size: 40px;
+    margin-bottom: 14px;
+    font-weight: 5    00;
+    background-size: contain!important;
+}
+
 .window-main-item-title span{
-    font-size: 14px;
-    padding-left: 80px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: top;
+    font-size: 14px;      
+    /* padding-left: 30px; */
+}
+.window-main-item-title span.icon-font{
+    font-size: 20px;
+    color: #999;
 }
 .customer-service-box img{
     display: block;
     width: 200px;
     height: 200px;
-    margin:80px auto 0;
+    margin:0 auto ;
 }
 
 .customer-service-box p{
-    color: #222;
+    color: #999;
     text-align: center;
-    font-size: 13px;
+    font-size: 11px;
     line-height: 18px;
 }
 /*礼包*/
 .package-wrap{
-    padding:0 20px;
     position: relative;
 }
 .package-box{
     border-bottom: 1px solid #f0f0f0;
 }
+.package-item{
+    padding: 16px 28px 16px 16px;
+}
 .package-item li .package-box{
     position: relative;
-    padding:10px 0;
-    height: 50px;
+    height: 44px;
+    
 }
 .package-item li .package-box .package-img{
     height: 50px;
@@ -242,10 +264,23 @@
 }
 .package-title{
     position: relative;
-    margin:20px 0;
-    height: 30px;
+    padding: 20px 20px;
+
 }
-.package-title > div{
+.package-title p{
+    color: #999;
+    font-size: 12px;
+    line-height: 20px;
+}
+.package-title-main{
+    height: 35px;
+    line-height: 35px;
+    background-color: #eee;
+    font-size: 13px;
+    color: #999;
+    padding: 0 15px;
+}
+/* .package-title > div{
     position: absolute;
     height: 30px;
     background-color: #d72132;
@@ -254,7 +289,7 @@
     line-height: 30px;
     text-indent: 20px;
     color: #fff;
-}
+} */
 .package-title > div .package-triangle{
     position: absolute;
     right:-1px;
@@ -279,13 +314,15 @@
 }
 .package-content{
     position: relative;
-    padding:8px 0;
+    height: 44px;
     border-bottom: 1px solid #f0f0f0;
+    padding: 10px 0;
 }
 .package-content .package-name{
-    font-size: 16px;
+    font-size: 13px;
     height: 22px;
     line-height: 22px;
+    font-weight: 600;
 }
 .package-content .package-describe{
     font-size: 12px;
@@ -296,6 +333,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    font-weight: 500;
 }
 .package-content .package-get-package{
     position: absolute;
@@ -320,18 +358,23 @@
 }
 /*存桌面*/
 .save-window-wrap{
+    padding: 24px 21px 0 40px;
     height: 100%;
-    background: url("../../image/save-window-bg.jpg") center 0 no-repeat;
-    background-size: cover!important;
+   /*  background: url("../../image/save-window-bg.png") center 0 no-repeat;
+    background-size: cover!important; */
 }
-@media only screen and (min-width: 600px){
+/* @media only screen and (min-width: 600px){
     .save-window-wrap{
         background-size: contain!important;
     }
+} */
+.save-window-wrap img{
+    width: 100%;
+    
 }
 /*更多游戏*/
 .more-game-wrap ul li{
-    padding:16px 15px;
+    padding:17px 10px;
     border-bottom: 1px solid #f5f5f5;
 }
 .more-game-wrap ul{
@@ -340,26 +383,27 @@
 }
 .more-game-img{
     float: left;
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     border-radius: 5px;
 }
 .more-game-box{
-    height: 50px;
+    height: 45px;
     float: left;
-    padding:5px 10px;
+    padding:0 10px;
     width: 130px;
 }
 .more-game-name{
-    font-size: 16px;
-    height: 16px;
-    line-height: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    height: 25px;
+    line-height: 25px;
     color: #333;
 }
 .more-game-content{
-    font-size: 14px;
+    font-size: 10px;
     color: #999;
-    margin-top: 14px;
+    line-height: 20px;
     width: 160px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -368,12 +412,13 @@
 .more-game-start{
     float: right;
     display: block;
-    height: 26px;
+    height: 20px;
     border: 1px solid #4385f5;
-    width: 50px;
+    width: 35px;
+    font-size: 11px;
     border-radius: 5px;
-    line-height: 26px;
+    line-height: 20px;
     text-align: center;
     color: #4385f5;
-    margin-top: 17px;
+    margin-top: 12px;
 }

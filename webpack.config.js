@@ -25,7 +25,8 @@ var config = {
     },
     output : {
         path : './dist/',
-        publicPath:'/play/',
+        // publicPath:'/play/',
+        publicPath:'/dist/',
         filename : 'js/[name].js'
     },
     externals : {
