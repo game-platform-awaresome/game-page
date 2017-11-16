@@ -13,7 +13,7 @@ var page = {
         var $windowWrap  = $('#windowWrap');
         $float.click(function () {
             $(this).hide();
-            $windowWrap.show();
+            $windowWrap.fadeIn();
         })
     },
     ballMove : function () {

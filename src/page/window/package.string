@@ -1,6 +1,6 @@
 
 <div class="package-title">
-    <p>使用方法:进入菜单界面选择设置按钮-设置系统右下角兑换码按钮-输入兑换码进行兑换</p>
+    <p>{{usage_method}}</p>
 </div>
 <div class="package-title-main">
     礼包内容
@@ -20,4 +20,8 @@
         </div>
     </li>
     {{/gift}}
+    {{^gift}}
+    <p class="nothing-gift">没有礼包哦~~</p>
+    {{/gift}}
+    
 </ul>

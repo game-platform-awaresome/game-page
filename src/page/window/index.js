@@ -139,7 +139,12 @@ var page = {
             $.get('/api/h5/game/cardlist',{gid:_this.data.gid},function (data) {
                 var html = '';
                 //将对象转换成数组
-                data.gift = _tool.transformArray(data.gift)
+                
+                if(data !== null) {
+                    if(typeof(data) === 'object' && data.hasOwnProperty('gift')){
+                         data.gift = _tool.transformArray(data.gift)
+                    }
+                }
                 html = _tool.renderHtml(packageHtml,data);
                 // console.log('加载礼包');
                 $('#packageWrap').html(html);
@@ -189,7 +194,7 @@ var page = {
 
         //关闭
         $windowClose.click(function () {
-            $windowWrap.hide();
+            $windowWrap.fadeOut(300);
             $float.show();
         })
         //刷新

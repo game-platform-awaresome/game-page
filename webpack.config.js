@@ -5,7 +5,10 @@ var HtmlWebpackPlugin   = require('html-webpack-plugin');
 //环境变量配置    dev  /  online
 var WEBPACK_ENV  =  process.env.WEBPACK_ENV  ||  'dev'
 console.log(WEBPACK_ENV)
-
+var pathPosition = {
+    online : '/play/',
+    dev : '/dist/'
+}
 
 //获取html-webpack-plugin参数的方法
 var getHtmlConfig = function (name) {
@@ -25,8 +28,7 @@ var config = {
     },
     output : {
         path : './dist/',
-        // publicPath:'/play/',
-        publicPath:'/dist/',
+        publicPath:pathPosition.online,
         filename : 'js/[name].js'
     },
     externals : {
