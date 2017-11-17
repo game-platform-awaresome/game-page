@@ -109,7 +109,7 @@
     margin-top: -11.25px;
     background: url("../../image/gohome.png") 0 center no-repeat;
     background-size: cover;
-    width: 22.5px;
+    width: 25.5px;
     height: 22.5px;
 }
 .window-change-account{
@@ -194,7 +194,7 @@
 }
 .window-main-list{
     height: calc(100% - 150px);
-    overflow-y: auto;
+    overflow:hidden;
 }
 
 /*客服*/
@@ -373,6 +373,11 @@
     
 }
 /*更多游戏*/
+.more-game-wrap{
+    height: 100%;
+    /* overflow-y: auto; */
+    -webkit-overflow-scrolling: touch;
+}
 .more-game-wrap ul li{
     padding:17px 10px;
     border-bottom: 1px solid #f5f5f5;
