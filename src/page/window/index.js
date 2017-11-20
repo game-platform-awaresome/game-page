@@ -4,6 +4,7 @@ var _window = require('service/window-service.js');
 var packageHtml = require('./package.string');
 var moreGmaeHtml = require('./more-game.string');
 var gameListHtml = require('view/gameList.string');
+var BScroll = require('better-scroll');
 var page = {
     data : {
         gameInfo : {
@@ -27,6 +28,7 @@ var page = {
         var $windowMainNav         = $('#windowMainNav');           //导航
         var $windowMainList        = $('#windowMainList');          //导航列表
         var $windowMainNavItem     = $('.window-main-nav-item');    //导航列表的集合
+        var $moreGameWrap          = $('#moreGameWrap');            //更多游戏外层容器
         //获取用户信息
         $.get('/api/h5/user/getUserinfo',function (res) {
             if (!res.user) {
@@ -45,7 +47,7 @@ var page = {
         //加载存桌面
 
         //微信和Android登录(修改为PC环境下不显示)
-        if(_tool.isPC()){
+        if(!_tool.isSafari()){
             this.cancelSaveWindow();
         }
        
@@ -110,9 +112,22 @@ var page = {
             var dataJson = {
                 game : data
             }
+            
             // console.log(dataJson)
+            //渲染DOM
+            
             html = _tool.renderHtml(moreGmaeHtml,dataJson);
             $('#moreGameWrap').html(html);
+            
+            console.log(moreGameWrap);
+            //加载滚动
+            
+            console.log($('#moreGameWrap').height());
+            var moreGameWraps = document.getElementById('moreGameWrap');
+            var bscroll = new BScroll(moreGameWraps,{
+                click:true
+            })
+            console.log(bscroll);
         },'JSON')
     },
     // 加载礼包

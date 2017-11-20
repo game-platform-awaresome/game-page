@@ -65,7 +65,7 @@ var config = {
 }
 //做判断
 if(WEBPACK_ENV === 'dev'){
-    config.entry.common.push('webpack-dev-server/client?http://localhost:8080/')
+    config.entry.common.push('webpack-dev-server/client?http://localhost:8088/')
 }
 
 module.exports = config;

@@ -105,7 +105,7 @@ var page = {
         })
 
         $('body').on("touchmove",function(e){
-            e.stopPropagation();
+            // e.stopPropagation();
             // console.log('执行body')
             if(isMouseDown){
                 var $float = $(".float");
@@ -124,7 +124,7 @@ var page = {
                 }
             }
         }).on("touchend",function(e){
-            e.stopPropagation();
+            // e.stopPropagation();
             $('iframe').css('pointer-events','auto');
             isMouseDown = false;
             lastPoint = {}
