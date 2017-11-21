@@ -95,7 +95,16 @@ var tools = {
             if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }    
         }    
         return flag;    
-    }  
+    },
+    //判断是否是IOS
+    isIOS : function(){    
+        var u = navigator.userAgent;
+        if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+            return true;
+        }else{
+            return false;
+        }
+    }    
 }
 
 module.exports = tools;

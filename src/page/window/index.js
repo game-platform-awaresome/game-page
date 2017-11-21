@@ -47,9 +47,11 @@ var page = {
         //加载存桌面
 
         //微信和Android登录(修改为PC环境下不显示)
-        if(!_tool.isSafari()){
+        // 不是IOS并且不是微信环境  || 是微信并且不是IOS
+        if(!_tool.isIOS()){
             this.cancelSaveWindow();
         }
+        console.log(_tool.isIOS())
        
         //加载礼包
         this.loadPackage();

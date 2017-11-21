@@ -56,7 +56,7 @@ var page = {
         })
 
         $('body').on("mousemove",function(e){
-            e.stopPropagation();
+            // e.stopPropagation();
             // console.log('执行body')
             if(isMouseDown){
                 var $float = $(".float");
@@ -75,7 +75,7 @@ var page = {
                 }
             }
         }).on("mouseup",function(e){
-            e.stopPropagation();
+            // e.stopPropagation();
             $('iframe').css('pointer-events','auto');
 
             isMouseDown = false;

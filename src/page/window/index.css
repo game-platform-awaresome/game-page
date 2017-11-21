@@ -427,6 +427,7 @@
     text-align: center;
     color: #4385f5;
     margin-top: 12px;
+    cursor: pointer;
 }
 .nothing-gift{
     text-align: center;
