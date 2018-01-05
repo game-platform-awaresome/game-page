@@ -2,7 +2,6 @@
 
 .game-play-page {
     position: relative;
-    min-height: 100%;
     background: #000;
     margin: 0 auto;
     height: 100%;
@@ -422,4 +421,77 @@
     to {
         opacity: 0;
     }
+}
+
+.top{
+    position: relative;
+    box-sizing: border-box;
+    padding: 12px 0;
+    display: none;
+}
+
+@media only screen and (min-width:750px){
+    .top{
+        display: block;
+        height: 88px;
+        background-color: #000
+    }
+    .game-play-page{
+        height: calc(100% - 88px);
+    }
+}
+
+.top .pc-logo{
+    margin-left: 44px;
+    width: 168px;
+    height: 65px;
+    background: url('../../image/pc-logo.png') 0 0 no-repeat;
+}
+.top .weiduan-btn{
+    position: absolute;
+    top: 20px;
+    cursor: pointer;
+    right: 23px;
+    width: 175px;
+    height: 52px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 52px;
+    letter-spacing: 2px;
+    color: #fff;
+    background: url('../../image/weiduan-btn.png') 0 0 no-repeat;
+    text-shadow: 0 0 5px #fbfe04;
+}
+
+.weiduan-code{
+    position: absolute;
+    padding: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 270px;
+    height: 350px;
+    z-index: 9999;
+    background-color: #fff;
+}
+.weiduan-code p{
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+}
+.weiduan-code img{
+    display: block;
+    margin-top: 20px;
+    width: 270px;
+    height: 270px;
+}
+.close-qr-code-btn{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    right: 0px;
+    top: 0px;
+    background: url('../../image/delete.png') center center no-repeat;
+    background-size: 20px;
 }

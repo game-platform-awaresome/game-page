@@ -29,6 +29,7 @@ var page = {
         var $windowMainList        = $('#windowMainList');          //导航列表
         var $windowMainNavItem     = $('.window-main-nav-item');    //导航列表的集合
         var $moreGameWrap          = $('#moreGameWrap');            //更多游戏外层容器
+        
         //获取用户信息
         $.get('/api/h5/user/getUserinfo',function (res) {
             if (!res.user) {
@@ -58,24 +59,28 @@ var page = {
 
         //开始游戏跳转
         this.locationHref();
+
+        
     },
     loadWechatFunction : function(){
         var _this = this;
         $.get('/api/h5/index/getwechatsdkconf',{route : encodeURIComponent(window.location.pathname + window.location.search)},function(data){
             wx.config(data);
 
-            // 分享到朋友圈
+            // 分享postMessage到朋友圈
             wx.onMenuShareTimeline({
                 title: _this.data.gameInfo.game_name + ' ' + _this.data.gameInfo.game_excerpt, // 分享标题
                 link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: _this.data.gameInfo.game_thumb, // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    $.get('/api/Integral/Task/share',function(data){
-                        if (data.code === 200){
-                            location.reload();
-                        }
-                    })
+                    $.get('/api/Integral/Task/share',{
+                        gid: _this.data.gid
+                    },function(data){
+                        console.log('分享成功')
+                    },'JSON')
+                    // 改研发发送postmessage         
+                    window.frames[0].postMessage('shareok',"*");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
@@ -93,11 +98,13 @@ var page = {
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    $.get('/api/Integral/Task/share',function(data){
-                        if (data.code === 200){
-                            location.reload();
-                        }
-                    })
+                    $.get('/api/Integral/Task/share',{
+                        gid: _this.data.gid
+                    },function(data){
+                        console.log('分享成功')
+                    },'JSON')
+                    // 改研发发送postmessage         
+                    window.frames[0].postMessage('shareok',"*");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
@@ -150,12 +157,12 @@ var page = {
             $('#metaGameTitle').attr('content',data.game_info.game_name);
             //加载返回窗口中的游戏
             $('#gameList').html(_tool.renderHtml(gameListHtml,data))
-
+            
             // 加载礼包内容
             /* 修改为click加载方式  */
             $.get('/api/h5/game/cardlist',{gid:_this.data.gid},function (data) {
                 var html = '';
-                //将对象转换成数组
+                //将对象转换成数组guo
                 
                 if(data !== null) {
                     if(typeof(data) === 'object' && data.hasOwnProperty('gift')){

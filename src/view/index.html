@@ -35,6 +35,22 @@
         <div class="game-loading-logo"></div>
     </div> 
     <!--loading E
+    <!-- top S -->
+    <div class="top">
+        <div class="pc-logo"></div>
+        <div class="weiduan-btn">
+            杯莫停微端下载
+            </div>
+    </div>
+    <!-- qr code S -->
+    <div class="weiduan-code" style="display:none">
+        <span class="close-qr-code-btn"></span>
+        <p>仅限安卓手机下载</p>
+        <p>(苹果手机暂未开放)</p>
+        <img id="weiduanQrCode" src="" alt="">
+    </div>
+    <!-- qr code E -->
+    <!-- top E -->
     <!--游戏iframe S-->
     <div class="game-play-page">
         <iframe class="class-iframe" style="width:100%;height:100%;" src="" frameborder="no" marginwidth="0px" marginheight="0px"></iframe>
@@ -76,9 +92,11 @@
     <!--扫码模块 S-->
     <div class="pay-box" id="saoma" style="display: none;">
         <div style="position: relative;">
-            <p class="pay-box-tit">微信扫码支付
+            <p class="pay-box-tit">
+                <span>微信</span> 扫码支付
                 <div class="saoma-close"
-                   id="closeSaoma"></div>
+                   id="closeSaoma">
+                </div>
             </p>
 
             <img id="ewm" src="" width="200" height="200"/>
@@ -138,7 +156,7 @@
     <!--悬浮页 E-->
 
     <!--悬浮球 S-->
-    <div class="float" id="float"></div>
+    <!-- <div class="float" id="float"></div> -->
     <!--悬浮球 E-->
     <%= require('html-loader!./layout/common.html')%>
 </body>

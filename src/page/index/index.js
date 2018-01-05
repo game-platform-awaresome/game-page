@@ -22,6 +22,10 @@ var page = {
         },4000);
     },
     bindEvent : function () {
+        var $weiduanBtn = $('.weiduan-btn')     //打开二维码按钮
+        var $weiduanCode = $('.weiduan-code')   //二维码窗口
+        var $weiduanQrCode = $('#weiduanQrCode')            //微端二维码
+        var $closeQrCodeBtn = $('.close-qr-code-btn')
         var _this = this;
         var obj = {};
         var serverId = tools.getUrlParam('id');        //获取区服ID
@@ -30,6 +34,23 @@ var page = {
             obj.qd_code = tools.getUrlParam('qd_code');
         }
         var gid = '';
+        
+        $weiduanBtn.click(function(){
+            // 统计下载次数
+            $.get('/api/h5/index/buttonClick',{
+                url: encodeURIComponent(window.location.href),
+                name: '扫码下载微端',
+                type: '游戏页'
+            },function(data){
+                if(data.code === 1) {
+                    console.log('统计')
+                }
+            },'json')
+            $weiduanCode.show()
+        })
+        $closeQrCodeBtn.click(function(){
+            $weiduanCode.hide()
+        })
 
 
         $.get('/api/h5/game/play',obj,function (data) {
@@ -39,7 +60,12 @@ var page = {
             $("#size57").attr('href',data.icon_list.icon_57);
             $("#size72").attr('href',data.icon_list.icon_72);
             $("#size144").attr('href',data.icon_list.icon_144);
-
+            // 二维码按钮
+            // $weiduanBtn.css('text-shadow','2px 1px 20px rgb(251,254,4)')
+            // $weiduanBtn.css('color','#000')
+            // $weiduanBtn.text(data.game_info.game_name + '微端下载')
+            // 调用生成二维码
+            $weiduanQrCode.attr('src','http://qr.liantu.com/api.php?text='+data.scan_url)
         },'JSON')
 
         //如果从iframe收到message,显示支付页面
@@ -61,7 +87,14 @@ var page = {
             order.paytype = $(this).attr('data-type');
             $("#pay-list li").find('span').removeClass('pay-select-active');
             $(this).find('span').addClass('pay-select-active');
-
+            if(order.paytype === 'wechat') {
+                $('.pay-box-tit span').html('微信')
+                $('.pay-box-bottom').html('请使用[微信扫一扫]支付')
+            }else {
+                $('.pay-box-tit span').html('支付宝')
+                $('.pay-box-bottom').html('请使用[支付宝扫一扫]支付')
+            }
+            
         })
 
 
