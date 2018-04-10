@@ -170,6 +170,10 @@
     background: url("../../image/pay-select-ali.png") 0 0 no-repeat;
     background-size: cover;
 }
+.paytype-ptb s{
+    background: url("../../image/pay-select-ptb.png") 0 0 no-repeat;
+    background-size: cover;
+}
 #pay-list li .pay-select{
     display: block;
     float: right;

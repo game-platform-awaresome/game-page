@@ -90,7 +90,7 @@ var page = {
             if(order.paytype === 'wechat') {
                 $('.pay-box-tit span').html('微信')
                 $('.pay-box-bottom').html('请使用[微信扫一扫]支付')
-            }else {
+            }else if(order.paytype === 'alipay') {
                 $('.pay-box-tit span').html('支付宝')
                 $('.pay-box-bottom').html('请使用[支付宝扫一扫]支付')
             }
@@ -129,9 +129,10 @@ var page = {
 
                     }else if(result.code === 2000){
                         $("#alipay-content").html(result.form);
-                    } else {
-                        // console.log(result.code + "shibai" + result.show)
-                        alert(result.show)
+                    } else if(result.code === 0){
+                        alert(result.msg)
+                    } else if(result.code === 200) {
+                        alert(result.msg)
                     }
                 }, 'json');
             }

@@ -40,19 +40,15 @@ var page = {
                     // console.log('不是'+ '/login?redirect=' + encodeURIComponent(window.location.href))
                     if (_tool.getUrlParam('type') === 'ios-one') {
                         window.location.href = '/login-ios-one?redirect=' + encodeURIComponent(window.location.href)
-                    }
-                    if (_tool.getUrlParam('type') === 'ios-two') {
+                    } else if (_tool.getUrlParam('type') === 'ios-two') {
                         window.location.href = '/login-ios-two?redirect=' + encodeURIComponent(window.location.href)
-                    }
-                    if (_tool.getUrlParam('type') === 'ios-three') {
+                    } else if (_tool.getUrlParam('type') === 'ios-three') {
                         window.location.href = '/login-ios-three?redirect=' + encodeURIComponent(window.location.href)
-                    }
-                    if (_tool.getUrlParam('type') === 'ios-four') {
+                    } else if (_tool.getUrlParam('type') === 'ios-four') {
                         window.location.href = '/login-ios-four?redirect=' + encodeURIComponent(window.location.href)
+                    } else {
+                        window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
                     }
-                     
-                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href)
-                    
                     
                 }
             }
