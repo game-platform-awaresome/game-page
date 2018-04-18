@@ -57,6 +57,13 @@ var page = {
             $('.class-iframe').attr('src',data.url)
             // console.log('游戏URL'+data.url)
             gid = data.gid;
+            if(data.switch == 0) {
+                $('.paytype-ptb').css('display','none');
+            } 
+            if(data.title_switch == 1) {
+                $('.top').addClass('download-top')
+                $('.game-play-page').addClass('download-page')
+            }
             $("#size57").attr('href',data.icon_list.icon_57);
             $("#size72").attr('href',data.icon_list.icon_72);
             $("#size144").attr('href',data.icon_list.icon_144);
