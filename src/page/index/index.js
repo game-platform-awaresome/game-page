@@ -60,9 +60,14 @@ var page = {
             if(data.switch == 0) {
                 $('.paytype-ptb').css('display','none');
             } 
+            // 顶部下载top
             if(data.title_switch == 1) {
                 $('.top').addClass('download-top')
                 $('.game-play-page').addClass('download-page')
+            }
+            // 游戏页气泡开关
+            if (data.bubble_switch == 1) {
+                $('#float').show()
             }
             $("#size57").attr('href',data.icon_list.icon_57);
             $("#size72").attr('href',data.icon_list.icon_72);
