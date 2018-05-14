@@ -1,6 +1,6 @@
 'use strict';
 var Hogan = require('hogan');
-
+// var wx = require('weixin-js-sdk')
 var tools = {
     //网络请求
     request : function (param) {
@@ -104,7 +104,15 @@ var tools = {
         }else{
             return false;
         }
-    }    
+    },
+    //判断是否是小程序
+    isXCX : function() {
+        var flag;
+        wx.miniProgram.getEnv(function (res) {
+            flag = res.miniprogram
+        })
+        return flag
+    }
 }
 
 module.exports = tools;

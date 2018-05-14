@@ -28,7 +28,7 @@ var config = {
     },
     output : {
         path : './dist/',
-        publicPath:pathPosition.online,
+        publicPath: pathPosition.online,
         filename : 'js/[name].js'
     },
     externals : {

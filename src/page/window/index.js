@@ -5,6 +5,7 @@ var packageHtml = require('./package.string');
 var moreGmaeHtml = require('./more-game.string');
 var gameListHtml = require('view/gameList.string');
 var BScroll = require('better-scroll');
+// var wx = require('weixin-js-sdk')
 var page = {
     data : {
         gameInfo : {
@@ -33,10 +34,16 @@ var page = {
         //获取用户信息
         $.get('/api/h5/user/getUserinfo',function (res) {
             if (!res.user) {
-                if(_tool.isWechat()){
+                if (_tool.isXCX()) {
+                    console.log('未登录状态跳转到微信小程序')
+                    wx.miniProgram.navigateTo({
+                        url: '/pages/index/index'
+                    })
+                } else if(_tool.isWechat()){
+                    console.log('未登录状态跳转到微信')
                     // console.log('是微信'+  '/api/h5/user/oauthlogin/oauthtype/wechat?redirect=' + encodeURIComponent(window.location.href))
                     window.location.href = '/api/h5/user/oauthlogin/oauthtype/wechat?redirect=' + encodeURIComponent(window.location.href)
-                }else{
+                }  else {
                     // console.log('不是'+ '/login?redirect=' + encodeURIComponent(window.location.href))
                     if (_tool.getUrlParam('type') === 'ios-one') {
                         window.location.href = '/login-ios-one?redirect=' + encodeURIComponent(window.location.href)

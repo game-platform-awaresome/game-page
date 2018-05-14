@@ -8,6 +8,15 @@ require('../window/index.js');
 
 var page = {
     init : function(){
+        // token -> PHPSESSION  
+        if (tools.getUrlParam('token')) {
+            $.cookie('PHPSESSID', null)
+            $.cookie('PHPSESSID', tools.getUrlParam('token'), {
+                expires: 90,
+                path: '/'
+            })
+            // window.location.onLoad()
+        }
         this.onLoad();
         this.bindEvent();
     },
@@ -33,8 +42,11 @@ var page = {
         if(tools.getUrlParam('qd_code')){
             obj.qd_code = tools.getUrlParam('qd_code');
         }
-        var gid = '';
         
+        var gid = '';
+        // order
+        var order = {};
+
         $weiduanBtn.click(function(){
             // 统计下载次数
             $.get('/api/h5/index/buttonClick',{
@@ -52,11 +64,17 @@ var page = {
             $weiduanCode.hide()
         })
 
-
+        // 弹窗开启与关闭
+        var openAlertWindow = true
+        var openPay = true
         $.get('/api/h5/game/play',obj,function (data) {
             $('.class-iframe').attr('src',data.url)
             // console.log('游戏URL'+data.url)
             gid = data.gid;
+            // 判断弹窗是否开启
+            if (data.pop_switch == 0) {
+                openAlertWindow = false
+            }
             if(data.switch == 0) {
                 $('.paytype-ptb').css('display','none');
             } 
@@ -69,6 +87,18 @@ var page = {
             if (data.bubble_switch == 1) {
                 $('#float').show()
             }
+            // 控制支付功能
+            if (data.pay_status == 0) {
+                openPay = false
+            }
+            // 控制支付宝
+            if (data.wxpay_switch == 0) {
+                $('.paytype-wechat').remove()
+            }
+            // 控制微信支付
+            if (data.alipay_switch == 0) {
+                $('.paytype-alipay').remove()
+            }
             $("#size57").attr('href',data.icon_list.icon_57);
             $("#size72").attr('href',data.icon_list.icon_72);
             $("#size144").attr('href',data.icon_list.icon_144);
@@ -77,22 +107,34 @@ var page = {
             // $weiduanBtn.css('color','#000')
             // $weiduanBtn.text(data.game_info.game_name + '微端下载')
             // 调用生成二维码
-            $weiduanQrCode.attr('src','http://qr.liantu.com/api.php?text='+data.scan_url)
+            $weiduanQrCode.attr('src','https://api.qrserver.com/v1/create-qr-code?data='+data.scan_url)
+        
+            // init data-type pay-select-active
+            $("#pay-list li").eq(0).find('span').addClass('pay-select-active');
+            order.dataType = $("#pay-list li").eq(0).attr('data-type');
+        
         },'JSON')
 
         //如果从iframe收到message,显示支付页面
-        var order = {};
-        window.addEventListener("message", function (event) {
+        
+
+        
+
+        if (openPay) {
+            window.addEventListener("message", function (event) {
             if (event.data.amount > 0) {
 
-                order = event.data;
-                order.paytype = 'wechat';
-                $('#pay-box').css('display', 'block');
-                $('#pname').html(event.data.name);
-                $('#price').html('¥ ' + event.data.amount);
-            }
+                    order = event.data;
+                    order.dataType = $("#pay-list li").eq(0).attr('data-type');
+                    $('#pay-box').css('display', 'block');
+                    $('#pname').html(event.data.name);
+                    $('#price').html('¥ ' + event.data.amount);
+                }
 
-        });
+            });
+        }
+        
+        
 
         //改变支付类型
         $("#pay-list li").click(function () {
@@ -123,16 +165,37 @@ var page = {
                 $("#backBanner").attr("src", "url")
             },
             starting: function () {
+                checkpay(order.oid)
 
+                if (tools.isXCX()) {
+                    order.paytype = 'minipay'
+                }
                 $.post('/api/h5/Pay/beginpay', order, function (result) {
+                    if (tools.isXCX()) {
+                        if (tools.isAndroid()) {
+                            //order为支付接口返回的参数
+                            var data = {
+                                jsParams: result.data
+                            };
+                            var params = '?timestamp=' + data.jsParams.timeStamp + '&nonceStr=' + data.jsParams.nonceStr + '&prepay_id=' + data.jsParams.prepay_id + '&signType=' + data.jsParams.signType + '&paySign=' + data.jsParams.paySign + '&appId=' + data.jsParams.appId + '&uid=' + data.jsParams.uid + '&place_order_time=' + data.jsParams.place_order_time + '&total_money=' + data.jsParams.total_money + '&order_des=' + data.jsParams.order_des + '&game_name=' + data.jsParams.game_name; //定义path 与小程序的支付页面的路径相对应
+                            var path = '/pages/minipay/minipay' + params; //通过JSSDK的api使小程序跳转到指定的小程序页面
+                            wx.miniProgram.navigateTo({
+                                url: path
+                            });
+                        } else {
+                            alert('暂不支持IOS设备')
+                        }
+                    }
+
+
                     if (result.code === 1) {
                         if (result.code_url) {
                             /*二维码支付*/
-                            $('#ewm').attr('src', "http://www.kukewan.com/pay/png?url=" + result.code_url);
+                            $('#ewm').attr('src', "https://api.qrserver.com/v1/create-qr-code?data=" + result.code_url);
                             $('#saoma').show();
                             //定时发送请求检查订单状态
                             //todo
-                            checkpay(order.oid)
+                            
                         }else if (result.mweb_url){
                             window.location.href = result.mweb_url;
                         }else{
@@ -154,7 +217,6 @@ var page = {
         $('#readyPay').click(function () {
             windowControl.starting();
         })
-
         function checkpay(oid) {
             var s = setInterval(function () {
                 $.get('/api/h5/pay/checkpay/order/' + oid, function (data) {
@@ -251,13 +313,14 @@ var page = {
         pushHistory();
 
         window.top.addEventListener("popstate", function (e) {  //回调函数中实现需要的功能
-            e.preventDefault()
+            if (openAlertWindow) {
+                e.preventDefault()
 
-            if (!$.cookie("oneday")) {
-                // console.log(history.length)
-                layers.open()
+                if (!$.cookie("oneday")) {
+                    // console.log(history.length)
+                    layers.open()
+                }
             }
-
         }, false);
 
         function pushHistory() {
